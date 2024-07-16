@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    #root {
+        @apply h-full;
+    }
+
+    html, body {
+        @apply h-full;
+
+        @apply select-none;
+
+        @apply bg-transparent;
+
+        @apply font-mono antialiased;
+
+        @apply overflow-hidden;
+
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-[#7A7A7A] rounded-md;
+    }
+
+    ::-webkit-scrollbar {
+        @apply w-1;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+}
+
+
+
+/* Sticky Notes Editor */
+.tiptap {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #fff;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* .editor-placeholder {
+    position: absolute;
+    overflow: hidden;
+    top: 8px;
+    left: 8px;
+} */
