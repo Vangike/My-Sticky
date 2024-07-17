@@ -4,7 +4,7 @@ import { StickyNote } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import { getFolder } from './lib/filehandling'
+import { loadFolder } from './lib/fileHandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -109,7 +109,7 @@ app.whenReady().then(() => {
     }
   )
 
-  ipcMain.handle('loadFolder', () => getFolder())
+  ipcMain.handle('loadFolder', () => loadFolder())
 
   createWindow()
 

@@ -1,8 +1,24 @@
-import { StickyNoteInfo } from '@shared/models'
+import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
 import { readdir, readFile, stat } from 'fs-extra'
 
-export const getFolder = async () => {
+// This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
+export const loadFolder = async (): Promise<FolderResult | null> => {
+  const folderPath = await getFolderPath()
+
+  if (!folderPath) {
+    return null
+  }
+
+  const stickyNoteResult = await getStickyNotesInPath(folderPath)
+
+  return {
+    path: folderPath,
+    stickyNoteList: stickyNoteResult
+  }
+}
+
+export const getFolderPath = async () => {
   const { filePaths, canceled } = await dialog.showOpenDialog({ properties: ['openDirectory'] })
 
   if (canceled) {
@@ -14,6 +30,10 @@ export const getFolder = async () => {
 
   console.info(filePath)
 
+  return filePath
+}
+
+export const getStickyNotesInPath = async (filePath: string) => {
   const stickyNotesNames = await readdir(filePath, {
     encoding: 'utf-8',
     withFileTypes: false

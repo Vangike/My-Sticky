@@ -6,3 +6,8 @@ export type StickyNoteInfo = {
 }
 
 export type StickyNoteContent = string
+
+export type FolderResult = {
+  path: string
+  stickyNoteList: StickyNoteInfo[]
+}

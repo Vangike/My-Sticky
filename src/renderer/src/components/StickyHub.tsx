@@ -1,7 +1,12 @@
-import { loadFolder, stickyNoteListAtoms } from '@renderer/store'
+import {
+  filePathAtom,
+  getStickyNoteFromFolder,
+  loadFolder,
+  stickyNoteListAtoms
+} from '@renderer/store'
 import { newStickyNote, openStickyNote } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { useSetAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
 export const OpenStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
@@ -14,16 +19,23 @@ export const NewStickyNoteFunction = async () => {
 
 export const NewStickyNote = () => {
   const setStickyFiles = useSetAtom(stickyNoteListAtoms)
+  const [filePathName, setFilePathName] = useAtom(filePathAtom)
 
   const handleLoadFolder = async () => {
-    const stickyFiles = await loadFolder()
+    const folderResult = await loadFolder()
+    const stickyFiles = getStickyNoteFromFolder(folderResult)
     setStickyFiles(stickyFiles)
+    setFilePathName(folderResult.path)
   }
 
   return (
     <div className="w-full bg-gradient-to-r from-neutral-700 to-neutral-800 flex flex-col items-center">
       <div className="w-11/12 bg-white mt-2 pl-2 rounded" onClick={handleLoadFolder}>
-        <h1>Testing</h1>
+        {filePathName ? (
+          <h1>{filePathName}</h1>
+        ) : (
+          <h1 className="italic">Click here to load in a folder</h1>
+        )}
       </div>
 
       <div className="w-full">

@@ -3,7 +3,7 @@ import { StickyNoteInfo } from '@shared/models'
 export interface StickyNoteAPI {
   locale: string
   stickyNote: StickyNote
-  loadFolder: () => Promise<StickyNoteInfo[] | null>
+  loadFolder: () => Promise<FolderResult | null>
   getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => void
 }
 
