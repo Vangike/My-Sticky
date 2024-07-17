@@ -2,7 +2,8 @@ import { StickyNoteInfo } from '@shared/models'
 
 export interface StickyNoteAPI {
   locale: string
-  stickyNote: (stickyNoteInfo: StickyNoteInfo) => Promise<boolean>
+  stickyNote: StickyNote
+  loadFolder: () => Promise<StickyNoteInfo[] | null>
   getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => void
 }
 

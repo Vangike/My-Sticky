@@ -1,15 +1,7 @@
-import { Editor, EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { EditorContent, FloatingMenu, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
-const extensions = [StarterKit]
-
-declare global {
-  interface TipTap {
-    editor: Editor | null
-  }
-}
-
-export const TiptapEditor = (props: { stickyNoteContent: string }) => {
+export const TiptapEditor = (props: { name: string; stickyNoteContent: string }) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -17,12 +9,16 @@ export const TiptapEditor = (props: { stickyNoteContent: string }) => {
       }
     },
     extensions: [StarterKit],
-    content: `${props.stickyNoteContent}`
+    content: `${props.stickyNoteContent}`,
+    onUpdate({ editor }) {
+      console.info(editor.getJSON())
+    }
   })
 
   return (
     <>
       <EditorContent editor={editor} />
+      <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
     </>
 
     // <EditorProvider extensions={extensions} content={props.stickyNoteContent}>

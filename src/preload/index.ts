@@ -12,6 +12,7 @@ try {
   contextBridge.exposeInMainWorld('api', {
     locale: navigator.language,
     stickyNote: (...args: Parameters<StickyNote>) => ipcRenderer.invoke('stickyNote', ...args),
+    loadFolder: () => ipcRenderer.invoke('loadFolder'),
     getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => {
       ipcRenderer.on('getStickyNoteInfo', (event, data) => cb(data))
     }

@@ -4,6 +4,7 @@ import { StickyNote } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
+import { getFolder } from './lib/filehandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -40,6 +41,8 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  mainWindow.webContents.openDevTools()
 }
 
 // METHOD: opens a new browser/window for sticky notes
@@ -105,6 +108,8 @@ app.whenReady().then(() => {
       stickyNote(stickyNoteInfo)
     }
   )
+
+  ipcMain.handle('loadFolder', () => getFolder())
 
   createWindow()
 

@@ -24,7 +24,7 @@ export const StickyNoteApp = () => {
       </div>
 
       <div className="p-2 overflow-y-auto flex-1">
-        <TiptapEditor stickyNoteContent={stickyNote.content} />
+        <TiptapEditor name={stickyNote.title} stickyNoteContent={stickyNote.content} />
       </div>
     </div>
   )

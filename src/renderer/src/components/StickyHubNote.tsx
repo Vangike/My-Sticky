@@ -1,6 +1,7 @@
-import { mockNotes } from '@renderer/store/example'
+import { stickyFilesAtom } from '@renderer/store'
 import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
+import { useAtomValue } from 'jotai'
 import { ComponentProps } from 'react'
 import { OpenStickyNoteFunction } from './StickyHub'
 
@@ -9,9 +10,16 @@ export type StickyNoteListProps = ComponentProps<'ul'>
 
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
+  const stickyNotes = useAtomValue(stickyFilesAtom)
+  console.info(stickyNotes)
+
+  if (!stickyNotes) {
+    return
+  }
+
   return (
     <ul className={className} {...props}>
-      {mockNotes.map((note, index) => (
+      {stickyNotes.map((note, index) => (
         <StickyNotePreview key={note.title + note.lastEditTime} {...note} />
       ))}
     </ul>
