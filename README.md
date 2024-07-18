@@ -82,7 +82,7 @@ provided.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@DapMike_Codes](https://twitter.com/DapMike_Codes)
+[@DapMike_Codes](https://twitter.com/DapMike_Codes)
 
 Project Link: [https://github.com/Vangike/My-Sticky](https://github.com/Vangike/My-Sticky)
 
