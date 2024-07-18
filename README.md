@@ -83,8 +83,7 @@ provided.
 ## Contact
 
 [@DapMike_Codes](https://twitter.com/DapMike_Codes)
-
-Project Link: [https://github.com/Vangike/My-Sticky](https://github.com/Vangike/My-Sticky)
+[https://github.com/Vangike/My-Sticky](https://github.com/Vangike/My-Sticky)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
