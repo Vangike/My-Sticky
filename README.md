@@ -26,7 +26,6 @@
     A rich text editing Sticky Notes
     <br />
     <br />
-    <a href="https://github.com/Vangike/My-Sticky">View Demo</a>
     ·
     <a href="https://github.com/Vangike/My-Sticky/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
