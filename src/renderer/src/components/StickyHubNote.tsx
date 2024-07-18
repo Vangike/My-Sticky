@@ -11,7 +11,6 @@ export type StickyNoteListProps = ComponentProps<'ul'>
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
   const stickyNotes = useAtomValue(stickyFilesAtom)
-  console.info(stickyNotes)
 
   if (!stickyNotes) {
     return
@@ -19,7 +18,7 @@ export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => 
 
   return (
     <ul className={className} {...props}>
-      {stickyNotes.map((note, index) => (
+      {stickyNotes.map((note) => (
         <StickyNotePreview key={note.title + note.lastEditTime} {...note} />
       ))}
     </ul>
@@ -37,6 +36,8 @@ export const StickyNotePreview = ({
 }: StickyNoteProps) => {
   const date = formateDateFromMs(lastEditTime)
 
+  const processedTitle = title.replace(/^.*[\\/]/, '')
+
   return (
     <div
       className="bg-amber-200 h-36 rounded-lg flex flex-col cursor-pointer"
@@ -44,13 +45,12 @@ export const StickyNotePreview = ({
       {...props}
     >
       <div className="flex justify-between">
-        <h3 className="ml-2 pt-2 mb-1 font-bold truncate">{title}</h3>
+        <h3 className="ml-2 pt-2 mb-1 font-bold truncate">{processedTitle}</h3>
         <button className="mr-2" onClick={(event) => StickyNoteDelete(event)}>
           Delete
         </button>
       </div>
       <h1 className="ml-2 truncate">{subtitle}</h1>
-      <p className="ml-2 truncate">{content}</p>
       <h1 className="ml-2 mt-auto">{date}</h1>
     </div>
   )

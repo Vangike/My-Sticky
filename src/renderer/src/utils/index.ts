@@ -21,7 +21,7 @@ export const newStickyNote = async () => {
     title: '',
     subtitle: '',
     lastEditTime: Date.now(),
-    content: 'testing!'
+    content: '{}'
   }
   const stickyNote = await window.api.stickyNote(newStickyNote)
 

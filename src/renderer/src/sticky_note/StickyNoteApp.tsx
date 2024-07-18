@@ -1,9 +1,7 @@
-import { StickyNoteInfo } from '@shared/models'
-import { atom, useAtom } from 'jotai'
+import { stickyNoteAtom } from '@renderer/store'
+import { useAtom } from 'jotai'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './TiptapEditor'
-
-const stickyNoteAtom = atom<StickyNoteInfo | null>(null)
 
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
@@ -20,11 +18,15 @@ export const StickyNoteApp = () => {
   return (
     <div className="flex flex-col max-h-screen">
       <div>
-        {stickyNote ? <StickyNoteHeader stickyNoteInfo={stickyNote} /> : <span>Error</span>}
+        {stickyNote ? (
+          <StickyNoteHeader stickyNoteInfo={stickyNote} />
+        ) : (
+          <span>Failed to load in this sticky note</span>
+        )}
       </div>
 
       <div className="p-2 overflow-y-auto flex-1">
-        <TiptapEditor name={stickyNote.title} stickyNoteContent={stickyNote.content} />
+        <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />
       </div>
     </div>
   )

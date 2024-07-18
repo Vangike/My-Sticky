@@ -1,13 +1,33 @@
-import {
-  filePathAtom,
-  getStickyNoteFromFolder,
-  loadFolder,
-  stickyNoteListAtoms
-} from '@renderer/store'
+import { filePathAtom, getListFromFolder, loadFolder, stickyFilesAtom } from '@renderer/store'
 import { newStickyNote, openStickyNote } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { useAtom, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
+
+const readContent = async (fileName: string) => {
+  const stickyNoteContent = await window.api.readContent(fileName)
+  console.info(stickyNoteContent)
+  return stickyNoteContent
+}
+
+export const OpenStickyNote = (title: string, subtitle: string, lastEditTime: number) => {
+  const content = readContent(title)
+
+  console.info(content)
+
+  if (!content) {
+    return
+  }
+
+  // const stickyNoteInfo = {
+  //   title,
+  //   subtitle,
+  //   lastEditTime,
+  //   content
+  // }
+
+  // await openStickyNote(stickyNoteInfo)
+}
 
 export const OpenStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
   await openStickyNote(stickyNoteInfo)
@@ -18,21 +38,23 @@ export const NewStickyNoteFunction = async () => {
 }
 
 export const NewStickyNote = () => {
-  const setStickyFiles = useSetAtom(stickyNoteListAtoms)
+  const setStickyFiles = useSetAtom(stickyFilesAtom)
   const [filePathName, setFilePathName] = useAtom(filePathAtom)
 
   const handleLoadFolder = async () => {
     const folderResult = await loadFolder()
-    const stickyFiles = getStickyNoteFromFolder(folderResult)
+    const stickyFiles = getListFromFolder(folderResult)
     setStickyFiles(stickyFiles)
     setFilePathName(folderResult.path)
   }
+
+  const processedTitle = filePathName.replace(/^.*[\\/]/, '')
 
   return (
     <div className="w-full bg-gradient-to-r from-neutral-700 to-neutral-800 flex flex-col items-center">
       <div className="w-11/12 bg-white mt-2 pl-2 rounded" onClick={handleLoadFolder}>
         {filePathName ? (
-          <h1>{filePathName}</h1>
+          <h1>{processedTitle}</h1>
         ) : (
           <h1 className="italic">Click here to load in a folder</h1>
         )}
