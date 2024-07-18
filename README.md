@@ -54,7 +54,7 @@ The current state of the project is shown below:
 ## Getting Started
 
 The project is still getting fleshed out! Once the project is in a stable state, instructions will be 
-provided. Otherwise, feel free to play around with it or start it in dev mode.
+provided.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
