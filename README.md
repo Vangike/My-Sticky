@@ -10,7 +10,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
@@ -20,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Vangike/My-Sticky">
-    <img src="MySticky.png" alt="Logo" width="80" height="80">
+    <img src="MySticky.png" alt="Logo" width="320" height="320">
   </a>
 
 <h3 align="center">MySticky</h3>
