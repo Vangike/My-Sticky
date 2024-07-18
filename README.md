@@ -23,7 +23,7 @@
 <h3 align="center">MySticky</h3>
 
   <p align="center">
-    A rich text editing Sticky Notes. The current state of the project is shown below!
+    A rich text editing Sticky Notes.
     <br />
     <br />
     ·
@@ -36,7 +36,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A rich text Sticky Note powered by [TipTap](https://tiptap.dev/). 
+A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).  
+The current state of the project is shown below:
 
 <img src="StickyNote.PNG" alt="Logo" width="640" height="640">
 
@@ -55,6 +56,27 @@ A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).
 
 The project is still getting fleshed out! Once the project is in a stable state, instructions will be 
 provided. Otherwise, feel free to play around with it or start it in dev mode.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- IMPLEMENTED -->
+## Working Functionality
+
+- Load in a folder and load in list of JSON sticky notes
+- Parse in JSON files by Tiptap editor
+- Autosaving 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Load content of a sticky note after modification
+- [ ] Create a new sticky note
+- [ ] Delete a sticky note
+- [ ] Individual sticky notes UI
+- [ ] Color customization of sticky notes
+- [ ] Editor implementation
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
