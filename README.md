@@ -70,7 +70,7 @@ provided.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Load content of a sticky note after modification
+- [ ] Load new content of a modified sticky note from the "hub"
 - [ ] Create a new sticky note
 - [ ] Delete a sticky note
 - [ ] Individual sticky notes UI
