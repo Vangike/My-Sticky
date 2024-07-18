@@ -33,9 +33,9 @@
 </div>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project (WIP)
 
-A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).  
+A rich text Sticky Note powered by [TipTap](https://tiptap.dev/). The current project is still in development.  
 The current state of the project is shown below:
 
 <img src="StickyNote.PNG" alt="Logo" width="640" height="640">
