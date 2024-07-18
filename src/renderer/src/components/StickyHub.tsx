@@ -4,31 +4,6 @@ import { StickyNoteInfo } from '@shared/models'
 import { useAtom, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
-const readContent = async (fileName: string) => {
-  const stickyNoteContent = await window.api.readContent(fileName)
-  console.info(stickyNoteContent)
-  return stickyNoteContent
-}
-
-export const OpenStickyNote = (title: string, subtitle: string, lastEditTime: number) => {
-  const content = readContent(title)
-
-  console.info(content)
-
-  if (!content) {
-    return
-  }
-
-  // const stickyNoteInfo = {
-  //   title,
-  //   subtitle,
-  //   lastEditTime,
-  //   content
-  // }
-
-  // await openStickyNote(stickyNoteInfo)
-}
-
 export const OpenStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
   await openStickyNote(stickyNoteInfo)
 }
