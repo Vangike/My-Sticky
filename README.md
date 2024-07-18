@@ -23,7 +23,7 @@
 <h3 align="center">MySticky</h3>
 
   <p align="center">
-    A rich text editing Sticky Notes
+    A rich text editing Sticky Notes. The current state of the project is shown below!
     <br />
     <br />
     ·
