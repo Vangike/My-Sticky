@@ -1,8 +1,31 @@
 import { filePathAtom, getListFromFolder, loadFolder, stickyFilesAtom } from '@renderer/store'
 import { newStickyNote, openStickyNote } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { useAtom, useSetAtom } from 'jotai'
+import { atom, useAtom, useSetAtom } from 'jotai'
+import { unwrap } from 'jotai/utils'
 import { ComponentProps } from 'react'
+
+const contentNoteAtomAsync = atom(async (get) => {
+  const noteContent = await window.api.readContent(
+    'C:\\Users\\ultri\\Desktop\\StickyNoteMockups\\test'
+  )
+  return {
+    content: noteContent
+  }
+})
+
+export const contentNoteAtom = unwrap(
+  contentNoteAtomAsync,
+  (prev) =>
+    prev ?? {
+      title: '',
+      content: '',
+      lastEditTime: Date.now(),
+      subtitle: ''
+    }
+)
+
+export const readStickyNoteFunction = (title: string) => {}
 
 export const OpenStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
   await openStickyNote(stickyNoteInfo)

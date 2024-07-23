@@ -1,6 +1,6 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { StickyNoteType } from '@shared/types'
+import { ReadNoteType, StickyNoteType } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
@@ -113,9 +113,11 @@ app.whenReady().then(() => {
   ipcMain.handle('saveContent', (event, fileName, content) => {
     saveContent(fileName, content)
   })
-  ipcMain.handle('readContent', (event, fileName) => {
-    readContent(fileName)
-  })
+
+  ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))
+  // ipcMain.handle('readContent', (event, fileName) => {
+  //   readContent(fileName)
+  // })
   ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
     getStickyNotesInPath(fileName)
   })
