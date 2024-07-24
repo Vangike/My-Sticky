@@ -63,14 +63,14 @@ provided.
 
 - Load in a folder and load in list of JSON sticky notes
 - Parse in JSON files by Tiptap editor
-- Autosaving 
+- Autosaving
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Load new content of a modified sticky note from the "hub"
+- [X] Load new content of a modified sticky note from the "hub"
 - [ ] Create a new sticky note
 - [ ] Delete a sticky note
 - [ ] Individual sticky notes UI
