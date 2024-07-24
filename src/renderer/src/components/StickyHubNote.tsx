@@ -29,9 +29,9 @@ export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => 
 export const StickyNotePreview = ({
   title,
   subtitle,
-  content,
   lastEditTime,
   className,
+  content,
   ...props
 }: StickyNoteProps) => {
   const date = formateDateFromMs(lastEditTime)

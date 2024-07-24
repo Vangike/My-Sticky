@@ -1,6 +1,6 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { StickyNoteType } from '@shared/types'
+import { ReadNoteType, StickyNoteType } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
@@ -49,6 +49,15 @@ function createWindow(): void {
 const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   const windowProperties = {}
 
+  // Get the Content of the Sticky Note
+  const content = await readContent(stickyNoteInfo.title)
+  const newStickyNoteInfo = {
+    title: stickyNoteInfo.title,
+    subtitle: stickyNoteInfo.subtitle,
+    lastEditTime: stickyNoteInfo.lastEditTime,
+    content: content
+  }
+
   // Init location of new window to application location
   if (BrowserWindow.getFocusedWindow()) {
     const current_window = BrowserWindow.getFocusedWindow()
@@ -79,7 +88,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   }
 
   stickyNote.on('ready-to-show', () => {
-    stickyNote.webContents.send('getStickyNoteInfo', stickyNoteInfo)
+    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo)
   })
 
   stickyNote.webContents.openDevTools()
@@ -113,9 +122,11 @@ app.whenReady().then(() => {
   ipcMain.handle('saveContent', (event, fileName, content) => {
     saveContent(fileName, content)
   })
-  ipcMain.handle('readContent', (event, fileName) => {
-    readContent(fileName)
-  })
+
+  ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))
+  // ipcMain.handle('readContent', (event, fileName) => {
+  //   readContent(fileName)
+  // })
   ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
     getStickyNotesInPath(fileName)
   })
