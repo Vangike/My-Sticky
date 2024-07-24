@@ -49,6 +49,15 @@ function createWindow(): void {
 const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   const windowProperties = {}
 
+  // Get the Content of the Sticky Note
+  const content = await readContent(stickyNoteInfo.title)
+  const newStickyNoteInfo = {
+    title: stickyNoteInfo.title,
+    subtitle: stickyNoteInfo.subtitle,
+    lastEditTime: stickyNoteInfo.lastEditTime,
+    content: content
+  }
+
   // Init location of new window to application location
   if (BrowserWindow.getFocusedWindow()) {
     const current_window = BrowserWindow.getFocusedWindow()
@@ -79,7 +88,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   }
 
   stickyNote.on('ready-to-show', () => {
-    stickyNote.webContents.send('getStickyNoteInfo', stickyNoteInfo)
+    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo)
   })
 
   stickyNote.webContents.openDevTools()
