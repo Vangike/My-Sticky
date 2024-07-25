@@ -73,7 +73,7 @@ provided.
 
 - [X] Load new content of a modified sticky note from the "hub"
 - [X] Create a new sticky note
-- [ ] Delete a sticky note
+- [X] Delete a sticky note
 - [ ] Individual sticky notes UI
 - [ ] Color customization of sticky notes
 - [ ] Editor implementation
