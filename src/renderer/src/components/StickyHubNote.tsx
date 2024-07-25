@@ -3,10 +3,14 @@ import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { useAtomValue } from 'jotai'
 import { ComponentProps } from 'react'
-import { OpenStickyNoteFunction } from './StickyHub'
+import { openStickyNote } from './StickyHub'
 
 export type StickyNoteProps = StickyNoteInfo & ComponentProps<'div'>
 export type StickyNoteListProps = ComponentProps<'ul'>
+
+const openStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
+  await openStickyNote(stickyNoteInfo)
+}
 
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
@@ -41,7 +45,7 @@ export const StickyNotePreview = ({
   return (
     <div
       className="bg-amber-200 h-36 rounded-lg flex flex-col cursor-pointer"
-      onClick={() => OpenStickyNoteFunction({ title, subtitle, lastEditTime, content })}
+      onClick={() => openStickyNoteFunction({ title, subtitle, lastEditTime, content })}
       {...props}
     >
       <div className="flex justify-between">
