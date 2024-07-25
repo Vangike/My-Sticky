@@ -64,16 +64,15 @@ provided.
 - Load in a folder and load in list of JSON sticky notes
 - Parse in JSON files by Tiptap editor
 - Autosaving
-- Creating Sticky Notes
+- Fully functioning sticky note by creating, writing, and deleting!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [X] Load new content of a modified sticky note from the "hub"
-- [X] Create a new sticky note
-- [X] Delete a sticky note
+- [ ] Renaming sticky notes
+- [ ] Subtitles for sticky notes
 - [ ] Individual sticky notes UI
 - [ ] Color customization of sticky notes
 - [ ] Editor implementation
