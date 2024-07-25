@@ -46,16 +46,14 @@ export const Header = () => {
   return (
     <div className="w-full bg-gradient-to-r from-neutral-700 to-neutral-800 flex flex-col items-center">
       <LoadFolder
-        className="w-11/12 bg-white mt-2 pl-2 rounded cursor-cell"
+        className="w-11/12 bg-white mt-2 pl-2 rounded cursor-pointer text-xl"
         onClick={handleLoadFolder}
       />
 
       <NewStickyNote
-        className="text-center text-9xl grow text-white w-full cursor-pointer"
+        className="text-center text-7xl grow text-white w-full cursor-cell"
         dir={dirPath}
       />
-
-      <SearchBar className="w-11/12 bg-white mt-2 pl-2 rounded mb-2 italic" />
     </div>
   )
 }

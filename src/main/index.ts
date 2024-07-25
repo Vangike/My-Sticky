@@ -20,8 +20,9 @@ function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 350,
-    height: 600,
+    height: 460,
     title: 'My Sticky',
+    icon: icon,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -81,7 +82,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
 
   Object.assign(windowProperties, {
     width: 350,
-    height: 600,
+    height: 460,
     title: fileName,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
