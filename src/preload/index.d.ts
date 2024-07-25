@@ -1,5 +1,5 @@
 import { StickyNoteInfo } from '@shared/models'
-import { ReadNoteType, StickyNoteType } from '@shared/types'
+import { NewNoteType, ReadNoteType, StickyNoteType } from '@shared/types'
 
 export interface StickyNoteAPI {
   locale: string
@@ -7,6 +7,7 @@ export interface StickyNoteAPI {
   loadFolder: () => Promise<FolderResult | null>
   saveContent: (file: string, content: string) => Promise<void>
   readContent: ReadNoteType
+  newStickyNote: NewNoteType
   getStickyNotesInPath: (filePath: string) => Promise<StickyNoteInfo[]>
   getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => void
 }

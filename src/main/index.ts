@@ -1,10 +1,16 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { ReadNoteType, StickyNoteType } from '@shared/types'
+import { NewNoteType, ReadNoteType, StickyNoteType } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import { getStickyNotesInPath, loadFolder, readContent, saveContent } from './lib/fileHandling'
+import {
+  getStickyNotesInPath,
+  loadFolder,
+  newStickyNote,
+  readContent,
+  saveContent
+} from './lib/fileHandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -122,11 +128,8 @@ app.whenReady().then(() => {
   ipcMain.handle('saveContent', (event, fileName, content) => {
     saveContent(fileName, content)
   })
-
   ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))
-  // ipcMain.handle('readContent', (event, fileName) => {
-  //   readContent(fileName)
-  // })
+  ipcMain.handle('newNote', (_, ...args: Parameters<NewNoteType>) => newStickyNote(...args))
   ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
     getStickyNotesInPath(fileName)
   })

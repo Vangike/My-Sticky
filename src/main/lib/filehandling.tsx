@@ -1,6 +1,7 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
 import { readdir, readFile, stat, writeFile } from 'fs-extra'
+import path from 'path'
 
 // This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
 export const loadFolder = async (): Promise<FolderResult | null> => {
@@ -62,7 +63,43 @@ export const saveContent = async (filename: string, content: string) => {
 }
 
 // Read sticky note content
-
 export const readContent = async (filename: string) => {
   return readFile(`${filename}.json`, { encoding: 'utf-8' })
+}
+
+// New sticky note
+export const newStickyNote = async (dirPath: string) => {
+  const { filePath, canceled } = await dialog.showSaveDialog({
+    title: 'New sticky note',
+    defaultPath: `${dirPath}/Untitled.json`,
+    properties: ['createDirectory', 'showOverwriteConfirmation'],
+    filters: [
+      {
+        name: 'JSON',
+        extensions: ['json']
+      }
+    ]
+  })
+
+  if (!filePath || canceled) {
+    console.info('Failed new sticky note')
+    return false
+  }
+
+  const { name: fileName, dir: parentDir } = path.parse(filePath)
+
+  if (parentDir != dirPath) {
+    await dialog.showMessageBox({
+      type: 'error',
+      title: 'New sticky note failed',
+      message: `Must be saved under ${dirPath}`
+    })
+
+    return false
+  }
+
+  console.info(`Creating Sticky Note: ${fileName} at ${dirPath}`)
+  await writeFile(filePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
+
+  return fileName
 }
