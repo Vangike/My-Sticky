@@ -3,6 +3,7 @@ import { StickyNoteInfo } from '@shared/models'
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
+// Handle new sticky note functionality
 type NewStickyNoteProp = ComponentProps<'div'> & {
   dir: string
 }
@@ -30,6 +31,7 @@ const newStickyAtom = atom(null, async (get, set, dir: string) => {
   set(stickyListAtom, [newNote, ...noteList.filter((note) => note.title !== newNote.title)])
 })
 
+// Header component for the Sticky Note application
 export const Header = () => {
   const setStickyFiles = useSetAtom(stickyListAtom)
   const [dirPath, setFilePathName] = useAtom(filePathAtom)
@@ -58,6 +60,7 @@ export const Header = () => {
   )
 }
 
+// Loadfolder component
 const LoadFolder = ({ className, onClick, ...props }: ComponentProps<'div'>) => {
   const filePathName = useAtomValue(filePathAtom)
   const processedTitle = filePathName.replace(/^.*[\\/]/, '')
@@ -73,6 +76,7 @@ const LoadFolder = ({ className, onClick, ...props }: ComponentProps<'div'>) => 
   )
 }
 
+// Create a new sticky note component
 const NewStickyNote = ({ className, dir, ...props }: NewStickyNoteProp) => {
   const createNew = useSetAtom(newStickyAtom)
 
@@ -87,6 +91,7 @@ const NewStickyNote = ({ className, dir, ...props }: NewStickyNoteProp) => {
   )
 }
 
+// WIP Searchbar component
 const SearchBar = ({ className, ...props }: ComponentProps<'div'>) => {
   return (
     <div className={className} {...props}>
