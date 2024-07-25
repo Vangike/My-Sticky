@@ -1,4 +1,4 @@
-import { stickyFilesAtom } from '@renderer/store'
+import { stickyListAtom } from '@renderer/store'
 import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { useAtomValue } from 'jotai'
@@ -21,7 +21,7 @@ const openStickyNote = async (stickyNote: StickyNoteInfo) => {
 
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
-  const stickyNotes = useAtomValue(stickyFilesAtom)
+  const stickyNotes = useAtomValue(stickyListAtom)
 
   if (!stickyNotes) {
     return

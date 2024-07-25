@@ -1,9 +1,10 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { atom } from 'jotai'
-import { atomWithStorage } from 'jotai/utils'
 
-export const stickyFilesAtom = atom<StickyNoteInfo[] | null>(null)
-export const filePathAtom = atomWithStorage('filePath', '')
+export const stickyListAtom = atom<StickyNoteInfo[] | null>(null)
+// export const filePathAtom = atomWithStorage('filePath', '')
+
+export const filePathAtom = atom<string>('')
 
 export const stickyNoteAtom = atom<StickyNoteInfo | null>(null)
 
