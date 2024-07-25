@@ -68,7 +68,7 @@ export const readContent = async (filename: string) => {
 }
 
 // New sticky note
-export const createStickyNote = async (dirPath: string) => {
+export const newStickyNote = async (dirPath: string) => {
   const { filePath, canceled } = await dialog.showSaveDialog({
     title: 'New sticky note',
     defaultPath: `${dirPath}/Untitled.json`,
@@ -99,7 +99,7 @@ export const createStickyNote = async (dirPath: string) => {
   }
 
   console.info(`Creating Sticky Note: ${fileName} at ${dirPath}`)
-  await writeFile(filePath, '')
+  await writeFile(filePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
 
   return fileName
 }

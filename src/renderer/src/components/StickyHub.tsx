@@ -1,37 +1,18 @@
 import { filePathAtom, getListFromFolder, loadFolder, stickyFilesAtom } from '@renderer/store'
-import { StickyNoteInfo } from '@shared/models'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
-export const NewStickyNoteFunction = async () => {
-  await newStickyNoteFuc()
-}
+export const newStickyFunction = async (dir: string) => {
+  const newSticky = await window.api.newStickyNote(dir)
 
-export const openStickyNote = async (stickyNote: StickyNoteInfo) => {
-  const openStickyNote = await window.api.stickyNote(stickyNote)
-
-  if (!openStickyNote) {
-    return
-  }
-}
-
-export const newStickyNoteFuc = async () => {
-  const newStickyNote: StickyNoteInfo = {
-    title: '',
-    subtitle: '',
-    lastEditTime: Date.now(),
-    content: '{}'
-  }
-  const stickyNote = await window.api.stickyNote(newStickyNote)
-
-  if (!stickyNote) {
+  if (!newSticky) {
     return
   }
 }
 
 export const Header = () => {
   const setStickyFiles = useSetAtom(stickyFilesAtom)
-  const setFilePathName = useSetAtom(filePathAtom)
+  const [dirPath, setFilePathName] = useAtom(filePathAtom)
 
   const handleLoadFolder = async () => {
     const folderResult = await loadFolder()
@@ -49,7 +30,7 @@ export const Header = () => {
 
       <NewStickyNote
         className="text-center text-9xl grow text-white w-full cursor-pointer"
-        onClick={newStickyNoteFuc}
+        onClick={() => newStickyFunction(dirPath)}
       />
 
       <SearchBar className="w-11/12 bg-white mt-2 pl-2 rounded mb-2 italic" />

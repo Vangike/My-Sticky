@@ -1,5 +1,5 @@
 import { StickyNoteInfo } from '@shared/models'
-import { ReadNoteType, SaveNoteType, StickyNoteType } from '@shared/types'
+import { NewNoteType, ReadNoteType, SaveNoteType, StickyNoteType } from '@shared/types'
 import { contextBridge, ipcRenderer } from 'electron'
 
 if (!process.contextIsolated) {
@@ -15,6 +15,7 @@ try {
     loadFolder: () => ipcRenderer.invoke('loadFolder'),
     saveContent: (...args: Parameters<SaveNoteType>) => ipcRenderer.invoke('saveContent', ...args),
     readContent: (...args: Parameters<ReadNoteType>) => ipcRenderer.invoke('readContent', ...args),
+    newStickyNote: (...args: Parameters<NewNoteType>) => ipcRenderer.invoke('newNote', ...args),
     getStickyNotesInPath: (fileName: string) =>
       ipcRenderer.invoke('getStickyNotesInPath', fileName),
     getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => {

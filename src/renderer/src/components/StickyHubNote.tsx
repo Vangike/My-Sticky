@@ -3,13 +3,20 @@ import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { useAtomValue } from 'jotai'
 import { ComponentProps } from 'react'
-import { openStickyNote } from './StickyHub'
 
 export type StickyNoteProps = StickyNoteInfo & ComponentProps<'div'>
 export type StickyNoteListProps = ComponentProps<'ul'>
 
 const openStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
   await openStickyNote(stickyNoteInfo)
+}
+
+const openStickyNote = async (stickyNote: StickyNoteInfo) => {
+  const openStickyNote = await window.api.stickyNote(stickyNote)
+
+  if (!openStickyNote) {
+    return
+  }
 }
 
 // Display a list of sticky notes
