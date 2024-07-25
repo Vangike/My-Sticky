@@ -65,17 +65,17 @@ provided.
 - Parse in JSON files by Tiptap editor
 - Autosaving
 - Fully functioning sticky note by creating, writing, and deleting!
+- Basic bold, italics, strikethrough
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Renaming sticky notes
-- [ ] Subtitles for sticky notes
-- [ ] Individual sticky notes UI
-- [ ] Color customization of sticky notes
-- [ ] Editor implementation
+- [ ] Rename sticky note
+- [ ] Sticky note subtitle
+- [ ] Individual sticky notes UI / Color customization
+- [ ] Rich text formatting (colors, highlight, bulletinpoints)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
