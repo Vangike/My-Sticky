@@ -7,43 +7,6 @@ import { ComponentProps } from 'react'
 export type StickyNoteProps = StickyNoteInfo & ComponentProps<'div'>
 export type StickyNoteListProps = ComponentProps<'ul'>
 
-// Delete functionality
-const deleteStickyAtom = atom(null, async (get, set, fileName: string) => {
-  const noteList = get(stickyListAtom)
-
-  if (fileName.length == 0 || !noteList) {
-    return
-  }
-
-  const deleteSticky = await window.api.deleteStickyNote(fileName)
-
-  if (!deleteSticky) {
-    return
-  }
-
-  set(stickyListAtom, [
-    ...noteList.filter((note) => {
-      if (note.title == fileName) {
-        return
-      }
-      return note
-    })
-  ])
-})
-
-// Open a sticky note functionality
-const openStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
-  await openStickyNote(stickyNoteInfo)
-}
-
-const openStickyNote = async (stickyNote: StickyNoteInfo) => {
-  const openStickyNote = await window.api.stickyNote(stickyNote)
-
-  if (!openStickyNote) {
-    return
-  }
-}
-
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
   const stickyNotes = useAtomValue(stickyListAtom)
@@ -99,8 +62,45 @@ export const StickyNotePreview = ({
   )
 }
 
+// Open a sticky note functionality
+const openStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
+  await openStickyNote(stickyNoteInfo)
+}
+
+const openStickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
+  const openStickyNote = await window.api.stickyNote(stickyNoteInfo)
+
+  if (!openStickyNote) {
+    return
+  }
+}
+
 // Handle deletion of a sticky note
 const StickyNoteDelete = (e, title) => {
   e.stopPropagation()
   console.info(title)
 }
+
+// Delete functionality
+const deleteStickyAtom = atom(null, async (get, set, fileName: string) => {
+  const noteList = get(stickyListAtom)
+
+  if (fileName.length == 0 || !noteList) {
+    return
+  }
+
+  const deleteSticky = await window.api.deleteStickyNote(fileName)
+
+  if (!deleteSticky) {
+    return
+  }
+
+  set(stickyListAtom, [
+    ...noteList.filter((note) => {
+      if (note.title == fileName) {
+        return
+      }
+      return note
+    })
+  ])
+})

@@ -17,15 +17,16 @@ export const StickyNoteApp = () => {
 
   return (
     <div className="flex h-full flex-col bg-blue-100">
-      <div>
-        {stickyNote ? (
-          <StickyNoteHeader stickyNoteInfo={stickyNote} />
-        ) : (
-          <span>Failed to load in this sticky note</span>
-        )}
-      </div>
+      {stickyNote ? (
+        <StickyNoteHeader
+          stickyNoteInfo={stickyNote}
+          className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm"
+        />
+      ) : (
+        <span>Failed to load in this sticky note</span>
+      )}
 
-      <div className="relative p-2 overflow-y-auto flex-1 h-full overflow-hidden">
+      <div className="relative p-2 mt-2 overflow-y-auto flex-1 h-full overflow-hidden">
         <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />
       </div>
     </div>

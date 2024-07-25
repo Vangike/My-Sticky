@@ -1,12 +1,15 @@
 import { StickyNoteInfo } from '@shared/models'
+import { ComponentProps } from 'react'
 
-export const StickyNoteHeader = (props: { stickyNoteInfo: StickyNoteInfo }) => {
-  const { stickyNoteInfo } = props
+type StickyNoteHeaderProp = ComponentProps<'div'> & {
+  stickyNoteInfo: StickyNoteInfo
+}
 
+export const StickyNoteHeader = ({ stickyNoteInfo, className }: StickyNoteHeaderProp) => {
   const processedTitle = stickyNoteInfo.title.replace(/^.*[\\/]/, '')
 
   return (
-    <div className="bg-amber-200 p-2">
+    <div className={className}>
       <h1 className="text-2xl">{processedTitle}</h1>
       <h1>{stickyNoteInfo.subtitle}</h1>
     </div>

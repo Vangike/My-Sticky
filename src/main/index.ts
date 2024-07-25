@@ -2,7 +2,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { DeleteNoteType, NewNoteType, ReadNoteType, StickyNoteType } from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
-import { join } from 'path'
+import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 import {
   deleteStickyNote,
@@ -21,6 +21,7 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 350,
     height: 600,
+    title: 'My Sticky',
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -65,6 +66,9 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
     content: content
   }
 
+  const { name: fileName } = path.parse(stickyNoteInfo.title)
+  console.log(fileName)
+
   // Init location of new window to application location
   if (BrowserWindow.getFocusedWindow()) {
     const current_window = BrowserWindow.getFocusedWindow()
@@ -78,6 +82,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   Object.assign(windowProperties, {
     width: 350,
     height: 600,
+    title: fileName,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
