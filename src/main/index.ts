@@ -18,8 +18,8 @@ app.disableHardwareAcceleration()
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 450,
-    height: 670,
+    width: 350,
+    height: 600,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -75,7 +75,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   }
 
   Object.assign(windowProperties, {
-    width: 450,
+    width: 350,
     height: 670,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
