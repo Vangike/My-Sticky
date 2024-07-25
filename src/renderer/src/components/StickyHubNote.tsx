@@ -40,7 +40,7 @@ export const StickyNotePreview = ({
 
   return (
     <div
-      className="bg-amber-200 h-36 rounded-lg flex flex-col cursor-pointer"
+      className="bg-amber-200 h-28 rounded-lg flex flex-col cursor-pointer shadow-md"
       onClick={() => openStickyNoteFunction({ title, subtitle, lastEditTime, content })}
       {...props}
     >

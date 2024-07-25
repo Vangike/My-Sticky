@@ -5,8 +5,8 @@ function App() {
     <div className="flex flex-col max-h-screen">
       <Header />
 
-      <div id="Body" className="p-2 space-y-2 overflow-y-auto flex-1">
-        <StickyNoteList className="space-y-2" />
+      <div id="Body" className="p-2 overflow-y-auto flex-1">
+        <StickyNoteList className="space-y-3" />
       </div>
     </div>
   )

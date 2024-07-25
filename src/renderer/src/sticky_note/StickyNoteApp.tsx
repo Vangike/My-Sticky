@@ -1,7 +1,7 @@
 import { stickyNoteAtom } from '@renderer/store'
 import { useAtom } from 'jotai'
 import { StickyNoteHeader } from './IndividualStickyNote'
-import { TiptapEditor } from './TiptapEditor'
+import { TiptapEditor } from './editor/TiptapEditor'
 
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
@@ -16,7 +16,7 @@ export const StickyNoteApp = () => {
   }
 
   return (
-    <div className="flex h-full flex-col bg-blue-100">
+    <div className="flex h-full flex-col">
       {stickyNote ? (
         <StickyNoteHeader
           stickyNoteInfo={stickyNote}
