@@ -1,6 +1,6 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
-import { readdir, readFile, stat, writeFile } from 'fs-extra'
+import { readdir, readFile, remove, stat, writeFile } from 'fs-extra'
 import path from 'path'
 
 // This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
@@ -67,7 +67,7 @@ export const readContent = async (filename: string) => {
   return readFile(`${filename}.json`, { encoding: 'utf-8' })
 }
 
-// New sticky note
+// Create a new sticky note
 export const newStickyNote = async (dirPath: string) => {
   const { filePath, canceled } = await dialog.showSaveDialog({
     title: 'New sticky note',
@@ -102,4 +102,26 @@ export const newStickyNote = async (dirPath: string) => {
   await writeFile(filePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
 
   return fileName
+}
+
+// Delete a sticky note
+
+export const deleteStickyNote = async (fileName: string) => {
+  const { response } = await dialog.showMessageBox({
+    type: 'warning',
+    title: 'Deleting sticky note',
+    message: `Delete ${fileName}?`,
+    buttons: ['Cancel', 'Delete'],
+    defaultId: 0,
+    cancelId: 0
+  })
+
+  if (response == 0) {
+    console.info(`Canceled deleting ${fileName}`)
+    return false
+  }
+
+  console.info(`Deleting ${fileName}`)
+  await remove(`${fileName}.json`)
+  return true
 }
