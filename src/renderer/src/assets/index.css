@@ -33,19 +33,16 @@
 }
 
 
+/* overflow-y-auto h-full max-h-screen*/ 
 
 /* Sticky Notes Editor */
 .tiptap {
-    height: 100%;
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #fff;
-    -webkit-tap-highlight-color: transparent;
+    @apply flex-1;
+    @apply h-full;
+    @apply max-h-screen;
+    @apply overflow-y-auto;
+    
+    &:focus {
+        outline: none;
+    }
 }
-
-/* .editor-placeholder {
-    position: absolute;
-    overflow: hidden;
-    top: 8px;
-    left: 8px;
-} */

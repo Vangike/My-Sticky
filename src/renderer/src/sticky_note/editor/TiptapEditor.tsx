@@ -1,8 +1,9 @@
 import { Editor } from '@tiptap/core'
-import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { atom, useSetAtom } from 'jotai'
 import { debounce } from 'lodash'
+import { TextMenu } from './menus/TextMenu/TextMenu'
 
 const saveContentAtom = atom(null, async (get, set, fileName: string, newContent: string) => {
   window.api.saveContent(fileName, newContent)
@@ -19,26 +20,24 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
   const editor = useEditor({
     editorProps: {
       attributes: {
-        class: 'bg-blue-100 h-96'
+        class: 'tiptap'
       }
     },
     extensions: [StarterKit],
     content: JSON.parse(props.stickyNoteContent),
     onUpdate({ editor }) {
-      // handleSaving(editor)
       handleSavingDebounce(editor, props.fileName, saveStickyContent)
     }
   })
 
+  if (!editor) {
+    return null
+  }
+
   return (
     <>
-      <EditorContent editor={editor} />
-      <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu>
+      <EditorContent editor={editor} className="flex-1 overflow-y-auto h-full max-h-screen" />
+      <TextMenu editor={editor} />
     </>
-
-    // <EditorProvider extensions={extensions} content={props.stickyNoteContent}>
-    //   <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
-    //   <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu>
-    // </EditorProvider>
   )
 }

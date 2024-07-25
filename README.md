@@ -92,6 +92,7 @@ provided.
 ## Acknowledgments
 
 * [Readme Template](https://github.com/othneildrew/Best-README-Template)
+* [Tiptap Template](https://templates.tiptap.dev/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
