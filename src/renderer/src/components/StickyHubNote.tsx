@@ -1,12 +1,37 @@
 import { stickyListAtom } from '@renderer/store'
 import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { useAtomValue } from 'jotai'
+import { atom, useAtomValue, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
 export type StickyNoteProps = StickyNoteInfo & ComponentProps<'div'>
 export type StickyNoteListProps = ComponentProps<'ul'>
 
+// Delete functionality
+const deleteStickyAtom = atom(null, async (get, set, fileName: string) => {
+  const noteList = get(stickyListAtom)
+
+  if (fileName.length == 0 || !noteList) {
+    return
+  }
+
+  const deleteSticky = await window.api.deleteStickyNote(fileName)
+
+  if (!deleteSticky) {
+    return
+  }
+
+  set(stickyListAtom, [
+    ...noteList.filter((note) => {
+      if (note.title == fileName) {
+        return
+      }
+      return note
+    })
+  ])
+})
+
+// Open a sticky note functionality
 const openStickyNoteFunction = async (stickyNoteInfo: StickyNoteInfo) => {
   await openStickyNote(stickyNoteInfo)
 }
@@ -45,8 +70,9 @@ export const StickyNotePreview = ({
   content,
   ...props
 }: StickyNoteProps) => {
-  const date = formateDateFromMs(lastEditTime)
+  const deleteSticky = useSetAtom(deleteStickyAtom)
 
+  const date = formateDateFromMs(lastEditTime)
   const processedTitle = title.replace(/^.*[\\/]/, '')
 
   return (
@@ -57,7 +83,13 @@ export const StickyNotePreview = ({
     >
       <div className="flex justify-between">
         <h3 className="ml-2 pt-2 mb-1 font-bold truncate">{processedTitle}</h3>
-        <button className="mr-2" onClick={(event) => StickyNoteDelete(event)}>
+        <button
+          className="mr-2"
+          onClick={(event) => {
+            StickyNoteDelete(event, title)
+            deleteSticky(title)
+          }}
+        >
           Delete
         </button>
       </div>
@@ -68,6 +100,7 @@ export const StickyNotePreview = ({
 }
 
 // Handle deletion of a sticky note
-const StickyNoteDelete = (e) => {
+const StickyNoteDelete = (e, title) => {
   e.stopPropagation()
+  console.info(title)
 }
