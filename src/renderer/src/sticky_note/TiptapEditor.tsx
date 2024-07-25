@@ -19,26 +19,20 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
   const editor = useEditor({
     editorProps: {
       attributes: {
-        class: 'bg-blue-100 h-96'
+        class: 'tiptap'
       }
     },
     extensions: [StarterKit],
     content: JSON.parse(props.stickyNoteContent),
     onUpdate({ editor }) {
-      // handleSaving(editor)
       handleSavingDebounce(editor, props.fileName, saveStickyContent)
     }
   })
 
   return (
     <>
-      <EditorContent editor={editor} />
-      <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu>
+      <EditorContent editor={editor} className="flex-1 overflow-y-auto h-full max-h-screen" />
+      <BubbleMenu editor={editor}>Bubble menu</BubbleMenu>
     </>
-
-    // <EditorProvider extensions={extensions} content={props.stickyNoteContent}>
-    //   <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
-    //   <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu>
-    // </EditorProvider>
   )
 }

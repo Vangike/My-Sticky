@@ -77,7 +77,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
 
   Object.assign(windowProperties, {
     width: 350,
-    height: 670,
+    height: 600,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,

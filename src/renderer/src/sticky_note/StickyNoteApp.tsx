@@ -16,7 +16,7 @@ export const StickyNoteApp = () => {
   }
 
   return (
-    <div className="flex flex-col max-h-screen">
+    <div className="flex h-full flex-col bg-blue-100">
       <div>
         {stickyNote ? (
           <StickyNoteHeader stickyNoteInfo={stickyNote} />
@@ -25,9 +25,11 @@ export const StickyNoteApp = () => {
         )}
       </div>
 
-      <div className="p-2 overflow-y-auto flex-1">
+      <div className="relative p-2 overflow-y-auto flex-1 h-full overflow-hidden">
         <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />
       </div>
     </div>
   )
 }
+
+// flex flex-col max-h-screen h-full bg-green-100
