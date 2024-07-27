@@ -24,6 +24,12 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
           <Icon name="Italic" />
         </button>
         <button
+          onClick={commands.onUnderline}
+          className={editor.isActive('underline') ? 'is-active' : ''}
+        >
+          <Icon name="Underline" />
+        </button>
+        <button
           onClick={commands.onStrike}
           className={editor.isActive('strike') ? 'is-active' : ''}
         >

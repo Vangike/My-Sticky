@@ -1147,10 +1147,10 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-typography/-/extension-typography-2.5.1.tgz"
   integrity sha512-Hrl4WT4w1zq5S1e3C8pRDiWeba3lq56KGTdR3PUYl0OX1Zv2z4PLu17JoSFcrCi1ZV1zVyNZQw7mPj1NRgjMdg==
 
-"@tiptap/extension-underline@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/@tiptap/extension-underline/-/extension-underline-2.5.1.tgz"
-  integrity sha512-pC2QVJgTCshk33iTvk2xjJWo3rodRG0AqNC5CLDjcCEHqaCYRpXvHSPvsZidfqa30mH0X0nyjdeSlyXftvPKgw==
+"@tiptap/extension-underline@^2.5.7":
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-underline/-/extension-underline-2.5.7.tgz#502abf03b4829e242a66c7eee7fe5b9bad51f4ce"
+  integrity sha512-MOGW2ZiKvgUTIg929pNV9yuaLAmmShvNyz+b4B3je/9Ub1Fum7V7Rsqfe+840/OZYx0wprpP3YponPQ8ftQuDg==
 
 "@tiptap/pm@^2.5.1":
   version "2.5.1"
@@ -3515,12 +3515,7 @@ lodash.merge@^4.6.2:
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-lodash@^4.17.15:
-  version "4.17.21"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
-lodash@^4.17.21:
+lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
