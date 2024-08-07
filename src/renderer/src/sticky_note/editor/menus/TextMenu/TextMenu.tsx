@@ -20,7 +20,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
 
   return (
     <BubbleMenu editor={editor} tippyOptions={{ popperOptions: { placement: 'top-start' } }}>
-      <div className="flex gap-2 p-0.5 border-solid border border-gray-100 shadow-md bg-white rounded">
+      <div className="flex flex-row gap-1 p-0.5 border-solid border border-gray-100 shadow-md bg-white rounded">
         <MemoButton onClick={commands.onBold} active={states.isBold}>
           <Icon name="Bold" />
         </MemoButton>
@@ -35,9 +35,9 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
         </MemoButton>
         <Popover.Root>
           <Popover.Trigger asChild>
-            <button>
+            <MemoButton>
               <Icon name="Palette" />
-            </button>
+            </MemoButton>
           </Popover.Trigger>
           <Popover.Content side="top" sideOffset={8} asChild></Popover.Content>
         </Popover.Root>

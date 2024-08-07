@@ -7,7 +7,6 @@ export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
 
   window.api.getStickyNoteInfo((stickyNoteInfo) => {
-    console.info(stickyNoteInfo)
     setStickyNote(stickyNoteInfo)
   })
 
