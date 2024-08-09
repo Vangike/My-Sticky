@@ -5,6 +5,7 @@ export const useTextmenuStates = (editor: Editor) => {
     isBold: editor.isActive('bold'),
     isItalic: editor.isActive('italic'),
     isStrike: editor.isActive('strike'),
-    isUnderline: editor.isActive('underline')
+    isUnderline: editor.isActive('underline'),
+    currentColor: editor.getAttributes('textStyle')?.color || undefined
   }
 }

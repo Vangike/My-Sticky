@@ -1,4 +1,5 @@
 import { Editor } from '@tiptap/core'
+import { Color } from '@tiptap/extension-color'
 import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -24,7 +25,7 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
         class: 'tiptap'
       }
     },
-    extensions: [StarterKit, Underline],
+    extensions: [StarterKit, Underline, Color],
     content: JSON.parse(props.stickyNoteContent),
     onUpdate({ editor }) {
       handleSavingDebounce(editor, props.fileName, saveStickyContent)

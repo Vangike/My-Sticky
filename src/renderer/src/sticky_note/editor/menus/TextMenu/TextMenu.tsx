@@ -2,11 +2,14 @@ import * as Popover from '@radix-ui/react-popover'
 import { BubbleMenu, Editor } from '@tiptap/react'
 import { memo } from 'react'
 import { Icon } from '../../ui/Icon'
+import { ColorPicker } from './Color'
 import { useTextmenuCommands } from './hooks/useTextmenuCommands'
 import { useTextmenuStates } from './hooks/useTextmenuStates'
+import { Surface } from './Surface'
 import { Toolbar } from './Toolbar'
 
 const MemoButton = memo(Toolbar.Button)
+const MemoColorPicker = memo(ColorPicker)
 
 export type TextMenuProps = {
   editor: Editor
@@ -15,8 +18,6 @@ export type TextMenuProps = {
 export const TextMenu = ({ editor }: TextMenuProps) => {
   const commands = useTextmenuCommands(editor)
   const states = useTextmenuStates(editor)
-
-  const buttonClassName = ''
 
   return (
     <BubbleMenu editor={editor} tippyOptions={{ popperOptions: { placement: 'top-start' } }}>
@@ -39,7 +40,15 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               <Icon name="Palette" />
             </MemoButton>
           </Popover.Trigger>
-          <Popover.Content side="top" sideOffset={8} asChild></Popover.Content>
+          <Popover.Content side="top" sideOffset={8} asChild>
+            <Surface className="p-1">
+              <MemoColorPicker
+                color={states.currentColor}
+                onChange={commands.onChangeColor}
+                onClear={commands.onClearColor}
+              />
+            </Surface>
+          </Popover.Content>
         </Popover.Root>
       </div>
     </BubbleMenu>
