@@ -10,7 +10,6 @@ export const StickyNoteHeader = ({ stickyNoteInfo, className }: StickyNoteHeader
 
   const handleTitleUpdate = useCallback((e) => {
     setTitle(e.target.value)
-    console.log(title)
   }, [])
 
   return (
