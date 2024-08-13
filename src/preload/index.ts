@@ -3,6 +3,7 @@ import {
   DeleteNoteType,
   NewNoteType,
   ReadNoteType,
+  RenameNoteType,
   SaveNoteType,
   StickyNoteType
 } from '@shared/types'
@@ -22,6 +23,7 @@ try {
     saveContent: (...args: Parameters<SaveNoteType>) => ipcRenderer.invoke('saveContent', ...args),
     readContent: (...args: Parameters<ReadNoteType>) => ipcRenderer.invoke('readContent', ...args),
     newStickyNote: (...args: Parameters<NewNoteType>) => ipcRenderer.invoke('newNote', ...args),
+    renameNote: (...args: Parameters<RenameNoteType>) => ipcRenderer.invoke('renameNote', ...args),
     deleteStickyNote: (...args: Parameters<DeleteNoteType>) =>
       ipcRenderer.invoke('deleteNote', ...args),
     getStickyNotesInPath: (fileName: string) =>

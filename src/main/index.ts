@@ -1,6 +1,12 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { DeleteNoteType, NewNoteType, ReadNoteType, StickyNoteType } from '@shared/types'
+import {
+  DeleteNoteType,
+  NewNoteType,
+  ReadNoteType,
+  RenameNoteType,
+  StickyNoteType
+} from '@shared/types'
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
@@ -10,6 +16,7 @@ import {
   loadFolder,
   newStickyNote,
   readContent,
+  renameNote,
   saveContent
 } from './lib/fileHandling'
 
@@ -144,6 +151,7 @@ app.whenReady().then(() => {
   ipcMain.handle('deleteNote', (_, ...args: Parameters<DeleteNoteType>) =>
     deleteStickyNote(...args)
   )
+  ipcMain.handle('renameNote', (_, ...args: Parameters<RenameNoteType>) => renameNote(...args))
 
   createWindow()
 
