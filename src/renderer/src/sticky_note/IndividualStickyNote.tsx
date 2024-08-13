@@ -45,6 +45,7 @@ export const StickyNoteHeader = ({ className }: ComponentProps<'div'>) => {
       <input
         className="text-2xl w-full bg-inherit"
         type="text"
+        tabIndex={-1}
         value={title}
         onChange={handleTitleUpdate}
         onBlur={handleTitleChange}
