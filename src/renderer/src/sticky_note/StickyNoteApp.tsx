@@ -1,14 +1,18 @@
 import { stickyNoteAtom } from '@renderer/store'
 import { useAtom } from 'jotai'
+import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
 
-  window.api.getStickyNoteInfo((stickyNoteInfo) => {
-    setStickyNote(stickyNoteInfo)
-  })
+  // Prevent rerendering and attaching
+  useEffect(() => {
+    window.api.getStickyNoteInfo((stickyNoteInfo) => {
+      setStickyNote(stickyNoteInfo)
+    })
+  }, [])
 
   if (stickyNote == null) {
     return
@@ -17,10 +21,7 @@ export const StickyNoteApp = () => {
   return (
     <div className="flex h-full flex-col">
       {stickyNote ? (
-        <StickyNoteHeader
-          stickyNoteInfo={stickyNote}
-          className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm"
-        />
+        <StickyNoteHeader className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm" />
       ) : (
         <span>Failed to load in this sticky note</span>
       )}
@@ -31,5 +32,3 @@ export const StickyNoteApp = () => {
     </div>
   )
 }
-
-// flex flex-col max-h-screen h-full bg-green-100

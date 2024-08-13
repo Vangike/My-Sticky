@@ -1,26 +1,44 @@
-import { stickyNoteAtom } from '@renderer/store'
+import { filePathAtom, stickyNoteAtom } from '@renderer/store'
 import { StickyNoteInfo } from '@shared/models'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
+
 import { ComponentProps, useCallback, useState } from 'react'
 
-type StickyNoteHeaderProp = ComponentProps<'div'> & {
-  stickyNoteInfo: StickyNoteInfo
+// Async function for updating title.
+const updateTitle = async (oldName: string, newName: string) => {
+  await window.api.renameNote(oldName, newName)
 }
 
-// Placeholder. The previous code utilize an atom for the sticky note in order to save to it. If we change the sticky note title, we also have to change that atom sticky note so it can be saved to the new place instead of the old place.
-
-export const StickyNoteHeader = ({ stickyNoteInfo, className }: StickyNoteHeaderProp) => {
+export const StickyNoteHeader = ({ className }: ComponentProps<'div'>) => {
+  // Atoms for changing title
   const [stickyAtom, setStickyAtom] = useAtom(stickyNoteAtom)
+  const [title, setTitle] = useState(stickyAtom!.title.replace(/^.*[\\/]/, ''))
+  const filePath = useAtomValue(filePathAtom)
 
-  const [title, setTitle] = useState(stickyNoteInfo.title.replace(/^.*[\\/]/, ''))
-
+  // Functions to handle onChange & onBlur
   const handleTitleUpdate = useCallback((e) => {
     setTitle(e.target.value)
   }, [])
 
   const handleTitleChange = useCallback(() => {
-    console.log('This has run!')
-  }, [title])
+    const fileName = stickyAtom!.title.replace(/^.*[\\/]/, '')
+
+    if (title == fileName) {
+      return
+    }
+
+    updateAtomTitle(filePath + '\\' + title)
+    updateTitle(stickyAtom!.title, title)
+  }, [title, stickyAtom])
+
+  const updateAtomTitle = (title: string) => {
+    setStickyAtom((prev) => {
+      if (prev) {
+        return { ...prev, title }
+      }
+      return prev
+    })
+  }
 
   return (
     <div className={className}>
@@ -31,7 +49,7 @@ export const StickyNoteHeader = ({ stickyNoteInfo, className }: StickyNoteHeader
         onChange={handleTitleUpdate}
         onBlur={handleTitleChange}
       />
-      <h1>{stickyNoteInfo.subtitle}</h1>
+      <h1>{stickyAtom?.subtitle}</h1>
     </div>
   )
 }

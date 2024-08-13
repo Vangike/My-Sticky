@@ -1,6 +1,6 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
-import { readdir, readFile, remove, stat, writeFile } from 'fs-extra'
+import { readdir, readFile, remove, rename, stat, writeFile } from 'fs-extra'
 import path from 'path'
 
 // This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
@@ -19,6 +19,7 @@ export const loadFolder = async (): Promise<FolderResult | null> => {
   }
 }
 
+// Get the folder path
 export const getFolderPath = async () => {
   const { filePaths, canceled } = await dialog.showOpenDialog({ properties: ['openDirectory'] })
 
@@ -34,6 +35,7 @@ export const getFolderPath = async () => {
   return filePath
 }
 
+// Get a list of sticky notes from the path
 export const getStickyNotesInPath = async (filePath: string) => {
   const stickyNotesNames = await readdir(filePath, {
     encoding: 'utf-8',
@@ -105,7 +107,6 @@ export const newStickyNote = async (dirPath: string) => {
 }
 
 // Delete a sticky note
-
 export const deleteStickyNote = async (fileName: string) => {
   const { response } = await dialog.showMessageBox({
     type: 'warning',
@@ -124,4 +125,17 @@ export const deleteStickyNote = async (fileName: string) => {
   console.info(`Deleting ${fileName}`)
   await remove(`${fileName}.json`)
   return true
+}
+
+// Rename a sticky note
+export const renameNote = async (filePath: string, newName: string) => {
+  const { name: fileName, dir: parentDir } = path.parse(filePath)
+
+  if (!filePath) {
+    return false
+  }
+
+  const newPath = parentDir + '\\' + newName + '.json'
+
+  return rename(filePath + '.json', newPath)
 }
