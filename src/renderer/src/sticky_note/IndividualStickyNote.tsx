@@ -43,7 +43,7 @@ export const StickyNoteHeader = ({ className }: ComponentProps<'div'>) => {
   return (
     <div className={className}>
       <input
-        className="focus:outline-none text-2xl w-full bg-inherit"
+        className="focus:outline-none text-xl w-full bg-inherit text-ellipsis"
         type="text"
         tabIndex={-1}
         value={title}
