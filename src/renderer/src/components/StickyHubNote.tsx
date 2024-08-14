@@ -41,7 +41,8 @@ export const StickyNotePreview = ({
 
   return (
     <div
-      className="bg-amber-200 h-28 rounded-lg flex flex-col cursor-pointer shadow-md"
+      className="bg-amber-200 h-28 rounded-lg flex flex-col cursor-pointer shadow-md 
+      transition ease-in-out duration-300 hover:shadow-lg"
       onClick={() => openStickyNoteFunction({ title, subtitle, lastEditTime, content })}
       {...props}
     >
@@ -52,7 +53,7 @@ export const StickyNotePreview = ({
 
         <div className="mr-2 pt-2">
           <button
-            className="rounded cursor-not-allowed text-white mix-blend-difference hover:text-neutral-500"
+            className="rounded cursor-not-allowed text-white mix-blend-difference transition ease-in-out duration-200 hover:text-neutral-500"
             onClick={(event) => {
               StickyNoteDelete(event, title)
               deleteSticky(title)
