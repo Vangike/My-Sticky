@@ -31,8 +31,6 @@ export const StickyNoteApp = () => {
       <div className="relative p-2 mt-2 overflow-y-auto flex-1 h-full overflow-hidden">
         <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />
       </div>
-
-      {browserId ? <div>{browserId}</div> : <div></div>}
     </div>
   )
 }
