@@ -21,7 +21,7 @@ export const StickyNoteApp = () => {
   return (
     <div className="flex h-full flex-col">
       {stickyNote ? (
-        <StickyNoteHeader className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm" />
+        <StickyNoteHeader className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm truncate" />
       ) : (
         <span>Failed to load in this sticky note</span>
       )}
