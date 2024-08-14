@@ -1,7 +1,7 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
 import { readdir, readFile, remove, rename, stat, writeFile } from 'fs-extra'
-import path from 'path'
+import path, { normalize } from 'path'
 
 // This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
 export const loadFolder = async (): Promise<FolderResult | null> => {
@@ -48,11 +48,11 @@ export const getStickyNotesInPath = async (filePath: string) => {
 }
 
 export const getStickyNoteInfo = async (path: string, file: string): Promise<StickyNoteInfo> => {
-  const stats = await stat(`${path}/${file}`)
-  const content = await readFile(`${path}/${file}`, { encoding: 'utf-8' })
+  const stats = await stat(normalize(`${path}/${file}`))
+  const content = await readFile(normalize(`${path}/${file}`), { encoding: 'utf-8' })
 
   return {
-    title: path + '\\' + file.replace(/\.json$/, ''),
+    title: normalize(path + '\\' + file.replace(/\.json$/, '')),
     subtitle: '',
     lastEditTime: stats.mtimeMs,
     content: content
@@ -73,7 +73,7 @@ export const readContent = async (filename: string) => {
 export const newStickyNote = async (dirPath: string) => {
   const { filePath, canceled } = await dialog.showSaveDialog({
     title: 'New sticky note',
-    defaultPath: `${dirPath}/Untitled.json`,
+    defaultPath: normalize(`${dirPath}/Untitled.json`),
     properties: ['createDirectory', 'showOverwriteConfirmation'],
     filters: [
       {
@@ -135,7 +135,7 @@ export const renameNote = async (filePath: string, newName: string) => {
     return false
   }
 
-  const newPath = parentDir + '\\' + newName + '.json'
+  const newPath = normalize(parentDir + '\\' + newName + '.json')
 
   return rename(filePath + '.json', newPath)
 }
