@@ -1,3 +1,4 @@
+import { Icon } from '@renderer/sticky_note/editor/ui/Icon'
 import { stickyListAtom } from '@renderer/store'
 import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
@@ -45,19 +46,25 @@ export const StickyNotePreview = ({
       {...props}
     >
       <div className="flex justify-between">
-        <h3 className="ml-2 pt-2 mb-1 font-bold truncate">{processedTitle}</h3>
-        <button
-          className="mr-2"
-          onClick={(event) => {
-            StickyNoteDelete(event, title)
-            deleteSticky(title)
-          }}
-        >
-          Delete
-        </button>
+        <h3 className="ml-2 pt-2 mb-1 font-bold truncate text-white mix-blend-difference">
+          {processedTitle}
+        </h3>
+
+        <div className="mr-2 pt-2">
+          <button
+            className="rounded cursor-not-allowed text-white mix-blend-difference hover:text-neutral-500"
+            onClick={(event) => {
+              StickyNoteDelete(event, title)
+              deleteSticky(title)
+            }}
+          >
+            <Icon className="min-w-6 min-h-6" name="Trash2" strokeWidth={2} />
+          </button>
+        </div>
       </div>
+
       <h1 className="ml-2 truncate">{subtitle}</h1>
-      <h1 className="ml-2 mt-auto">{date}</h1>
+      <h1 className="ml-2 mt-auto text-white mix-blend-difference">{date}</h1>
     </div>
   )
 }
