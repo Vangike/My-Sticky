@@ -1,6 +1,6 @@
 import { FolderResult, StickyNoteInfo } from '@shared/models'
 import { dialog } from 'electron'
-import { readdir, readFile, remove, rename, stat, writeFile } from 'fs-extra'
+import { existsSync, readdir, readFile, remove, rename, stat, writeFile } from 'fs-extra'
 import path, { normalize } from 'path'
 
 // This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
@@ -71,6 +71,15 @@ export const readContent = async (filename: string) => {
 
 // Create a new sticky note
 export const newStickyNote = async (dirPath: string) => {
+  // const newFileName = 'newNote'
+
+  // let i = 0
+  // while (existsSync(normalize(`${dirPath}/${newFileName}${i}.json`))) {
+  //   i++
+  // }
+
+  // const newFilePath = `${dirPath}/${newFileName}${i}.json`
+
   const { filePath, canceled } = await dialog.showSaveDialog({
     title: 'New sticky note',
     defaultPath: normalize(`${dirPath}/Untitled.json`),
@@ -101,6 +110,7 @@ export const newStickyNote = async (dirPath: string) => {
   }
 
   console.info(`Creating Sticky Note: ${fileName} at ${dirPath}`)
+
   await writeFile(filePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
 
   return fileName
