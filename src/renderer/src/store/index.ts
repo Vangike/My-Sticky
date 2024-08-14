@@ -6,6 +6,7 @@ export const stickyListAtom = atom<StickyNoteInfo[] | null>(null)
 export const filePathAtom = atomWithStorage('filePath', '')
 
 export const stickyNoteAtom = atom<StickyNoteInfo | null>(null)
+export const browserIDAtom = atom<number>(0)
 
 export const loadFolder = async () => {
   const folderResult: FolderResult = await window.api.loadFolder()
