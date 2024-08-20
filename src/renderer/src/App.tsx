@@ -3,15 +3,12 @@ import { TitleBar } from './components/TitleBar'
 
 function App() {
   return (
-    <div>
+    <div className="flex flex-col max-h-screen">
       <TitleBar />
+      <Header />
 
-      <div className="flex flex-col max-h-screen">
-        <Header />
-
-        <div id="Body" className="p-2 overflow-y-auto flex-1">
-          <StickyNoteList className="space-y-3" />
-        </div>
+      <div id="Body" className="p-2 overflow-y-auto flex-1">
+        <StickyNoteList className="space-y-3" />
       </div>
     </div>
   )
