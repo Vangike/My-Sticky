@@ -1,3 +1,4 @@
+import { TitleBar } from '@renderer/components/TitleBar'
 import { stickyNoteAtom } from '@renderer/store'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
@@ -20,6 +21,7 @@ export const StickyNoteApp = () => {
 
   return (
     <div className="flex h-full flex-col">
+      <TitleBar />
       {stickyNote ? (
         <StickyNoteHeader className="w-full bg-amber-200 p-2 shadow-md rounded-b-sm truncate" />
       ) : (

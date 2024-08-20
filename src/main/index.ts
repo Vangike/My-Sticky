@@ -93,6 +93,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
     width: 350,
     height: 460,
     title: fileName,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,

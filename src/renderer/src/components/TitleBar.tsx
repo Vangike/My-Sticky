@@ -1,5 +1,6 @@
+import { useTextmenuCommands } from '@renderer/sticky_note/editor/menus/TextMenu/hooks/useTextmenuCommands'
 import { cn } from '@renderer/utils'
-import { ComponentProps, HTMLProps } from 'react'
+import { ComponentProps, HTMLProps, useCallback } from 'react'
 
 type TitleButtonProps = HTMLProps<HTMLButtonElement> & {
   withRed?: boolean
@@ -25,13 +26,30 @@ const TitleButton = ({
   )
 }
 
+const useTitleCommands = () => {
+  const minimize = async () => {
+    await window.api.newStickyNote('')
+  }
+
+  const close = async () => {
+    await window.api.newStickyNote('')
+  }
+
+  return {
+    minimize,
+    close
+  }
+}
+
 export const TitleBar = () => {
+  const titleCommands = useTitleCommands()
+
   return (
     <nav className="titlebar flex flex-row width-full items-center bg-neutral-800 text-white justify-between">
       <div></div>
       <div className="flex flex-row w-12 space-x-1">
-        <TitleButton value="&minus;" />
-        <TitleButton withRed={true} value="&#10006;" />
+        <TitleButton value="&minus;" onClick={titleCommands.minimize} />
+        <TitleButton withRed={true} value="&#10006;" onClick={titleCommands.close} />
       </div>
     </nav>
   )
