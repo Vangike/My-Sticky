@@ -28,9 +28,11 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 350,
     height: 460,
+    minHeight: 80,
     title: 'My Sticky',
     icon: icon,
     show: false,
+    frame: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
