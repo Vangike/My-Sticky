@@ -1,5 +1,5 @@
 import { Header, StickyNoteList } from '@/components'
-import { TitleBar } from './components/TitleBar'
+import { TitleBar } from './components/TitleBar/TitleBar'
 
 function App() {
   return (
