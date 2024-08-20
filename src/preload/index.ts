@@ -18,6 +18,10 @@ if (!process.contextIsolated) {
 try {
   contextBridge.exposeInMainWorld('api', {
     locale: navigator.language,
+    // Title bar
+    appClose: () => ipcRenderer.invoke('appClose'),
+    appMinimize: () => ipcRenderer.invoke('appMinimize'),
+    // File handling
     stickyNote: (...args: Parameters<StickyNoteType>) => ipcRenderer.invoke('stickyNote', ...args),
     loadFolder: () => ipcRenderer.invoke('loadFolder'),
     saveContent: (...args: Parameters<SaveNoteType>) => ipcRenderer.invoke('saveContent', ...args),

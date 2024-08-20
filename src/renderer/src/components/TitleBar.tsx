@@ -28,11 +28,11 @@ const TitleButton = ({
 
 const useTitleCommands = () => {
   const minimize = async () => {
-    await window.api.newStickyNote('')
+    window.api.appMinimize()
   }
 
   const close = async () => {
-    await window.api.newStickyNote('')
+    window.api.appClose()
   }
 
   return {

@@ -9,6 +9,10 @@ import {
 
 export interface StickyNoteAPI {
   locale: string
+  // Title bars
+  appMinimize: () => void
+  appClose: () => void
+  // File handling
   stickyNote: StickyNoteType
   loadFolder: () => Promise<FolderResult | null>
   saveContent: (file: string, content: string) => Promise<void>

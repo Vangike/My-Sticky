@@ -19,6 +19,7 @@ import {
   renameNote,
   saveContent
 } from './lib/fileHandling'
+import { appClose, appMinimize } from './lib/titleBar'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -133,7 +134,11 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC Handling
+  // IPC Handling for title bars
+  ipcMain.handle('appMinimize', () => appMinimize())
+  ipcMain.handle('appClose', () => appClose())
+
+  // IPC Handling for file handling
   ipcMain.handle(
     'stickyNote',
     (event, stickyNoteInfo: StickyNoteInfo, ...args: Parameters<StickyNoteType>) => {
