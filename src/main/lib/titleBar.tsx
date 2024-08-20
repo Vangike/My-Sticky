@@ -18,7 +18,7 @@ export const appDropdown = () => {
     return
   }
 
-  if (browserSize[1] < 70) {
+  if (browserSize[1] < 72) {
     browser.setSize(browserSize[0], 180)
   } else {
     browser.setSize(browserSize[0], 68)
