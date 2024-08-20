@@ -21,6 +21,7 @@ try {
     // Title bar
     appClose: () => ipcRenderer.invoke('appClose'),
     appMinimize: () => ipcRenderer.invoke('appMinimize'),
+    appDropdown: () => ipcRenderer.invoke('appDropdown'),
     // File handling
     stickyNote: (...args: Parameters<StickyNoteType>) => ipcRenderer.invoke('stickyNote', ...args),
     loadFolder: () => ipcRenderer.invoke('loadFolder'),

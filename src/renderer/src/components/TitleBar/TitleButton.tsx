@@ -10,6 +10,7 @@ export const TitleButton = ({
   value,
   withRed = false,
   onClick,
+  title,
   ...props
 }: TitleButtonProps) => {
   const titleClass = cn(
@@ -19,7 +20,7 @@ export const TitleButton = ({
   )
 
   return (
-    <button className={titleClass} onClick={onClick}>
+    <button className={titleClass} onClick={onClick} title={title}>
       {value}
     </button>
   )

@@ -19,7 +19,7 @@ import {
   renameNote,
   saveContent
 } from './lib/fileHandling'
-import { appClose, appMinimize } from './lib/titleBar'
+import { appClose, appDropdown, appDropDown, appMinimize } from './lib/titleBar'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -93,6 +93,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   Object.assign(windowProperties, {
     width: 350,
     height: 460,
+    minHeight: 68,
     title: fileName,
     frame: false,
     webPreferences: {
@@ -137,6 +138,7 @@ app.whenReady().then(() => {
   // IPC Handling for title bars
   ipcMain.handle('appMinimize', () => appMinimize())
   ipcMain.handle('appClose', () => appClose())
+  ipcMain.handle('appDropdown', () => appDropdown())
 
   // IPC Handling for file handling
   ipcMain.handle(

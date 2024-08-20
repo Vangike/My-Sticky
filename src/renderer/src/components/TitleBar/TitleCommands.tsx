@@ -15,7 +15,7 @@ export const useTitleCommands = () => {
 
 export const useStickyTitleCommands = () => {
   const dropdown = () => {
-    window.api.appMinimize()
+    window.api.appDropdown()
   }
 
   return {

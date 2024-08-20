@@ -14,7 +14,7 @@ const StickyNoteTitleBar = () => {
 
   return (
     <>
-      <TitleButton value="&#94;" onClick={stickyTitleCommands.dropdown} />
+      <TitleButton value="&#94;" onClick={stickyTitleCommands.dropdown} title="Dropdown" />
     </>
   )
 }
@@ -36,8 +36,8 @@ export const TitleBar = ({ className, isStickyNote = false, ...props }: TitleBar
             <StickyNoteTitleBar />
           </>
         )}
-        <TitleButton value="&minus;" onClick={titleCommands.minimize} />
-        <TitleButton withRed={true} value="&#10006;" onClick={titleCommands.close} />
+        <TitleButton value="&minus;" onClick={titleCommands.minimize} title="Minimize" />
+        <TitleButton withRed={true} value="&#10006;" onClick={titleCommands.close} title="Close" />
       </div>
     </div>
   )

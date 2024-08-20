@@ -12,6 +12,7 @@ export interface StickyNoteAPI {
   // Title bars
   appMinimize: () => void
   appClose: () => void
+  appDropdown: () => void
   // File handling
   stickyNote: StickyNoteType
   loadFolder: () => Promise<FolderResult | null>
