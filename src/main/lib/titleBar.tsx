@@ -14,8 +14,6 @@ export const appDropdown = () => {
   const browser = BrowserWindow.getFocusedWindow()
   const browserSize = browser?.getSize()
 
-  console.log(browserSize)
-
   if (!browserSize || !browser) {
     return
   }
