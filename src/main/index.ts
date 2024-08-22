@@ -7,7 +7,7 @@ import {
   RenameNoteType,
   StickyNoteType
 } from '@shared/types'
-import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, MessageChannelMain, shell } from 'electron'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 import {
@@ -19,7 +19,7 @@ import {
   renameNote,
   saveContent
 } from './lib/fileHandling'
-import { appClose, appDropdown, appDropDown, appMinimize } from './lib/titleBar'
+import { appClose, appDropdown, appMinimize } from './lib/titleBar'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -81,9 +81,9 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   console.log(fileName)
 
   // Init location of new window to application location
-  if (BrowserWindow.getFocusedWindow()) {
-    const current_window = BrowserWindow.getFocusedWindow()
-    const pos = current_window.getPosition()
+  const parentWindow = BrowserWindow.getFocusedWindow()
+  if (parentWindow) {
+    const pos = parentWindow.getPosition()
     Object.assign(windowProperties, {
       x: pos[0] + 20,
       y: pos[1] + 20

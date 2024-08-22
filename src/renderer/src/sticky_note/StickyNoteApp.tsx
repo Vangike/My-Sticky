@@ -5,6 +5,11 @@ import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
+window.onmessage = (e) => {
+  console.log(e.data)
+  e.ports[0].postMessage('hi from main world')
+}
+
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
 
