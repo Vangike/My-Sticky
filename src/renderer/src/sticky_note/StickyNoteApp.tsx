@@ -1,6 +1,6 @@
 import { TitleBar } from '@renderer/components/TitleBar/TitleBar'
-import { stickyNoteAtom } from '@renderer/store'
-import { atom, useAtom } from 'jotai'
+import { browserIDAtom, stickyNoteAtom } from '@renderer/store'
+import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
@@ -15,11 +15,13 @@ window.onmessage = (e) => {
 
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
+  const [browserId, setBrowserId] = useAtom(browserIDAtom)
 
   // Prevent rerendering and attaching
   useEffect(() => {
-    window.api.getStickyNoteInfo((stickyNoteInfo) => {
+    window.api.getStickyNoteInfo((stickyNoteInfo, id) => {
       setStickyNote(stickyNoteInfo)
+      setBrowserId(id)
     })
   }, [])
 

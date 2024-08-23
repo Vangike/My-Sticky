@@ -113,10 +113,11 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   }
 
   stickyNote.on('ready-to-show', () => {
-    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo)
+    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo, stickyNote.id)
   })
 
   stickyNote.webContents.openDevTools()
+
   return true
 }
 

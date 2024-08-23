@@ -21,7 +21,7 @@ export interface StickyNoteAPI {
   newStickyNote: NewNoteType
   deleteStickyNote: DeleteNoteType
   getStickyNotesInPath: (filePath: string) => Promise<StickyNoteInfo[]>
-  getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => void
+  getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => void
   renameNote: RenameNoteType
 }
 

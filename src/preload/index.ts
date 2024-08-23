@@ -33,8 +33,8 @@ try {
       ipcRenderer.invoke('deleteNote', ...args),
     getStickyNotesInPath: (fileName: string) =>
       ipcRenderer.invoke('getStickyNotesInPath', fileName),
-    getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo) => void) => {
-      ipcRenderer.on('getStickyNoteInfo', (event, data) => cb(data))
+    getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => {
+      ipcRenderer.on('getStickyNoteInfo', (event, data, id) => cb(data, id))
     }
   })
 } catch (error) {
