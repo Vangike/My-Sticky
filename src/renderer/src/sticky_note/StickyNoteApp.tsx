@@ -1,12 +1,15 @@
 import { TitleBar } from '@renderer/components/TitleBar/TitleBar'
 import { stickyNoteAtom } from '@renderer/store'
-import { useAtom } from 'jotai'
+import { atom, useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
+export let port
+
 window.onmessage = (e) => {
   console.log(e.data)
+  port = e.ports[0]
   e.ports[0].postMessage('hi from main world')
 }
 
@@ -33,6 +36,15 @@ export const StickyNoteApp = () => {
       ) : (
         <span>Failed to load in this sticky note</span>
       )}
+
+      <button
+        onClick={() => {
+          port.postMessage('Hello from window')
+        }}
+      >
+        {' '}
+        button{' '}
+      </button>
 
       <div className="relative p-2 mt-2 overflow-y-auto flex-1 h-full overflow-hidden">
         <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />
