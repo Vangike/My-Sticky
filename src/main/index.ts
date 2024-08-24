@@ -7,7 +7,7 @@ import {
   RenameNoteType,
   StickyNoteType
 } from '@shared/types'
-import { app, BrowserWindow, ipcMain, Menu, MessageChannelMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 import {
@@ -23,6 +23,8 @@ import { appClose, appDropdown, appMinimize } from './lib/titleBar'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
+
+const windowMap: Map<number, BrowserWindow> = new Map()
 
 function createWindow(): void {
   // Create the browser window.
@@ -127,7 +129,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
 
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.mysticky')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -163,6 +165,14 @@ app.whenReady().then(() => {
     deleteStickyNote(...args)
   )
   ipcMain.handle('renameNote', (_, ...args: Parameters<RenameNoteType>) => renameNote(...args))
+
+  // IPC Handling for port messages
+  ipcMain.handle('childMessage', (_, message) => {
+    if (message.type == 'TitleChange') {
+      console.log('Title changed!')
+      console.log(message.content)
+    }
+  })
 
   createWindow()
 

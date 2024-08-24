@@ -43,11 +43,9 @@ try {
 
 window.onload = () => {
   const { port1, port2 } = new MessageChannel()
-  window.postMessage('hi', '*', [port2])
-
-  console.log('This ran!')
+  window.postMessage({ data: 'Sending' }, '*', [port2])
 
   port1.onmessage = (e) => {
-    console.log('isolated context got message: ', e.data)
+    ipcRenderer.invoke('childMessage', e.data)
   }
 }

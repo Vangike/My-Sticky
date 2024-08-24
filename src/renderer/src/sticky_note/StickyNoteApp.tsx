@@ -5,12 +5,11 @@ import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
+// Port to communicate data back to Main
 export let port
-
 window.onmessage = (e) => {
-  console.log(e.data)
+  console.log(e)
   port = e.ports[0]
-  e.ports[0].postMessage('hi from main world')
 }
 
 export const StickyNoteApp = () => {
@@ -41,11 +40,10 @@ export const StickyNoteApp = () => {
 
       <button
         onClick={() => {
-          port.postMessage('Hello from window')
+          port.postMessage({ type: 'TitleChange', content: browserId })
         }}
       >
-        {' '}
-        button{' '}
+        button
       </button>
 
       <div className="relative p-2 mt-2 overflow-y-auto flex-1 h-full overflow-hidden">

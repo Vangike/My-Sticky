@@ -1,6 +1,12 @@
 import { Header, StickyNoteList } from '@/components'
 import { TitleBar } from './components/TitleBar/TitleBar'
 
+export let port
+window.onmessage = (e) => {
+  console.log(e.data)
+  port = e.ports[0]
+}
+
 function App() {
   return (
     <div className="flex flex-col max-h-screen">
