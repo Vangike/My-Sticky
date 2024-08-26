@@ -1,10 +1,11 @@
 import { Header, StickyNoteList } from '@/components'
+import { useEffect } from 'react'
 import { TitleBar } from './components/TitleBar/TitleBar'
 
-export let port
+export let messagePort
 window.onmessage = (e) => {
   console.log(e.data)
-  port = e.ports[0]
+  messagePort = e.ports[0]
 }
 
 function App() {

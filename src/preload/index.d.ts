@@ -9,7 +9,9 @@ import {
 
 export interface StickyNoteAPI {
   locale: string
-  // Title bars
+  // Util functions
+  pathNormalize: (path: string) => string
+  // Title bars function
   appMinimize: () => void
   appClose: () => void
   appDropdown: () => void
@@ -21,8 +23,10 @@ export interface StickyNoteAPI {
   newStickyNote: NewNoteType
   deleteStickyNote: DeleteNoteType
   getStickyNotesInPath: (filePath: string) => Promise<StickyNoteInfo[]>
-  getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => void
   renameNote: RenameNoteType
+  // Listeners
+  stickyNoteInfoListener: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => void
+  titleChangeListener: (cb: (oldTitle: string, newTitle: string) => void) => void
 }
 
 declare global {

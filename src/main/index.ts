@@ -1,25 +1,10 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import {
-  DeleteNoteType,
-  NewNoteType,
-  ReadNoteType,
-  RenameNoteType,
-  StickyNoteType
-} from '@shared/types'
-import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+import { app, BrowserWindow, Menu, shell } from 'electron'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import {
-  deleteStickyNote,
-  getStickyNotesInPath,
-  loadFolder,
-  newStickyNote,
-  readContent,
-  renameNote,
-  saveContent
-} from './lib/fileHandling'
-import { appClose, appDropdown, appMinimize } from './lib/titleBar'
+import { appIPCHandle } from './ipcHandle'
+import { readContent } from './lib/fileHandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
@@ -67,7 +52,7 @@ function createWindow(): void {
 }
 
 // METHOD: opens a new browser/window for sticky notes
-const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
+export const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   const windowProperties = {}
 
   // Get the Content of the Sticky Note
@@ -138,41 +123,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC Handling for title bars
-  ipcMain.handle('appMinimize', () => appMinimize())
-  ipcMain.handle('appClose', () => appClose())
-  ipcMain.handle('appDropdown', () => appDropdown())
-
-  // IPC Handling for file handling
-  ipcMain.handle(
-    'stickyNote',
-    (event, stickyNoteInfo: StickyNoteInfo, ...args: Parameters<StickyNoteType>) => {
-      stickyNote(stickyNoteInfo)
-    }
-  )
-  ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
-    getStickyNotesInPath(fileName)
-  })
-
-  ipcMain.handle('loadFolder', () => loadFolder())
-  ipcMain.handle('saveContent', (event, fileName, content) => {
-    saveContent(fileName, content)
-  })
-  ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))
-
-  ipcMain.handle('newNote', (_, ...args: Parameters<NewNoteType>) => newStickyNote(...args))
-  ipcMain.handle('deleteNote', (_, ...args: Parameters<DeleteNoteType>) =>
-    deleteStickyNote(...args)
-  )
-  ipcMain.handle('renameNote', (_, ...args: Parameters<RenameNoteType>) => renameNote(...args))
-
-  // IPC Handling for port messages
-  ipcMain.handle('childMessage', (_, message) => {
-    if (message.type == 'TitleChange') {
-      console.log('Title changed!')
-      console.log(message.content)
-    }
-  })
+  // Function that handles all IPC handlers
+  appIPCHandle()
 
   createWindow()
 

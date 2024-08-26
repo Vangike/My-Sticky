@@ -2,8 +2,8 @@ import { Icon } from '@renderer/sticky_note/editor/ui/Icon'
 import { stickyListAtom } from '@renderer/store'
 import { formateDateFromMs } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
-import { atom, useAtomValue, useSetAtom } from 'jotai'
-import { ComponentProps } from 'react'
+import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { ComponentProps, useEffect } from 'react'
 
 export type StickyNoteProps = StickyNoteInfo & ComponentProps<'div'>
 export type StickyNoteListProps = ComponentProps<'ul'>
@@ -11,6 +11,17 @@ export type StickyNoteListProps = ComponentProps<'ul'>
 // Display a list of sticky notes
 export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => {
   const stickyNotes = useAtomValue(stickyListAtom)
+
+  // A listener to the main process.
+  // The main process sends info containing an old title and new title
+  // This function updates the old title to new title when a sticky note title has been changed
+  const updateTitle = useSetAtom(updateTitleAtom)
+  useEffect(() => {
+    window.api.titleChangeListener((oldTitle, newTitle) => {
+      console.log(oldTitle + ' ' + newTitle)
+      updateTitle(oldTitle, newTitle)
+    })
+  }, [updateTitle])
 
   if (!stickyNotes) {
     return
@@ -107,6 +118,27 @@ const deleteStickyAtom = atom(null, async (get, set, fileName: string) => {
     ...noteList.filter((note) => {
       if (note.title == fileName) {
         return
+      }
+      return note
+    })
+  ])
+})
+
+// Update title functionality
+const updateTitleAtom = atom(null, async (get, set, oldTitle: string, newTitle: string) => {
+  const noteList = get(stickyListAtom)
+
+  if (!noteList || oldTitle == newTitle) {
+    return
+  }
+
+  set(stickyListAtom, [
+    ...noteList.map((note) => {
+      if (note.title === oldTitle) {
+        return {
+          ...note,
+          title: newTitle
+        }
       }
       return note
     })

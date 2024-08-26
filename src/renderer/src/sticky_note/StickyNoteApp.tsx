@@ -5,20 +5,21 @@ import { useEffect } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
-// Port to communicate data back to Main
-export let port
+// Message port to communicate data back to Main process
+export let messagePort
 window.onmessage = (e) => {
   console.log(e)
-  port = e.ports[0]
+  messagePort = e.ports[0]
 }
 
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
   const [browserId, setBrowserId] = useAtom(browserIDAtom)
 
-  // Prevent rerendering and attaching
+  // Listener from Main to get sticky note information
+  // Activate once to prevent rerendering and attaching
   useEffect(() => {
-    window.api.getStickyNoteInfo((stickyNoteInfo, id) => {
+    window.api.stickyNoteInfoListener((stickyNoteInfo, id) => {
       setStickyNote(stickyNoteInfo)
       setBrowserId(id)
     })
@@ -37,14 +38,6 @@ export const StickyNoteApp = () => {
       ) : (
         <span>Failed to load in this sticky note</span>
       )}
-
-      <button
-        onClick={() => {
-          port.postMessage({ type: 'TitleChange', content: browserId })
-        }}
-      >
-        button
-      </button>
 
       <div className="relative p-2 mt-2 overflow-y-auto flex-1 h-full overflow-hidden">
         <TiptapEditor fileName={stickyNote.title} stickyNoteContent={stickyNote.content} />

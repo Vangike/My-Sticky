@@ -18,6 +18,8 @@ if (!process.contextIsolated) {
 try {
   contextBridge.exposeInMainWorld('api', {
     locale: navigator.language,
+    // Utils
+    pathNormalize: (path: string) => ipcRenderer.invoke('pathNormalize', path),
     // Title bar
     appClose: () => ipcRenderer.invoke('appClose'),
     appMinimize: () => ipcRenderer.invoke('appMinimize'),
@@ -33,9 +35,14 @@ try {
       ipcRenderer.invoke('deleteNote', ...args),
     getStickyNotesInPath: (fileName: string) =>
       ipcRenderer.invoke('getStickyNotesInPath', fileName),
-    getStickyNoteInfo: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => {
+    // Listeners
+    stickyNoteInfoListener: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => {
       ipcRenderer.on('getStickyNoteInfo', (event, data, id) => cb(data, id))
-    }
+    },
+    titleChangeListener: (callback) =>
+      ipcRenderer.on('getTitleChange', (_, oldTitle: string, newTitle: string) =>
+        callback(oldTitle, newTitle)
+      )
   })
 } catch (error) {
   console.error(error)

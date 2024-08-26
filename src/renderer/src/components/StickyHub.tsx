@@ -88,12 +88,3 @@ const NewStickyNote = ({ className, dir, ...props }: NewStickyNoteProp) => {
     </div>
   )
 }
-
-// WIP Searchbar component
-const SearchBar = ({ className, ...props }: ComponentProps<'div'>) => {
-  return (
-    <div className={className} {...props}>
-      Search...
-    </div>
-  )
-}
