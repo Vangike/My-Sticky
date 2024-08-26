@@ -18,10 +18,15 @@ export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => 
   const updateTitle = useSetAtom(updateTitleAtom)
   useEffect(() => {
     window.api.titleChangeListener((oldTitle, newTitle) => {
-      console.log(oldTitle + ' ' + newTitle)
       updateTitle(oldTitle, newTitle)
     })
   }, [updateTitle])
+
+  // Sort the list every time the Sticky Note List gets modified
+  useEffect(() => {
+    console.log('sorting!')
+    stickyNotes?.sort((a, b) => b.lastEditTime - a.lastEditTime)
+  }, [stickyNotes])
 
   if (!stickyNotes) {
     return
