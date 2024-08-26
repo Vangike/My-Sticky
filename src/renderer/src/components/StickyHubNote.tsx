@@ -24,7 +24,6 @@ export const StickyNoteList = ({ className, ...props }: StickyNoteListProps) => 
 
   // Sort the list every time the Sticky Note List gets modified
   useEffect(() => {
-    console.log('sorting!')
     stickyNotes?.sort((a, b) => b.lastEditTime - a.lastEditTime)
   }, [stickyNotes])
 
