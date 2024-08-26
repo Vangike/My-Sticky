@@ -71,47 +71,19 @@ export const readContent = async (filename: string) => {
 
 // Create a new sticky note
 export const newStickyNote = async (dirPath: string) => {
-  // const newFileName = 'newNote'
+  const newFileName = 'newNote'
 
-  // let i = 0
-  // while (existsSync(normalize(`${dirPath}/${newFileName}${i}.json`))) {
-  //   i++
-  // }
-
-  // const newFilePath = `${dirPath}/${newFileName}${i}.json`
-
-  const { filePath, canceled } = await dialog.showSaveDialog({
-    title: 'New sticky note',
-    defaultPath: normalize(`${dirPath}/Untitled.json`),
-    properties: ['createDirectory', 'showOverwriteConfirmation'],
-    filters: [
-      {
-        name: 'JSON',
-        extensions: ['json']
-      }
-    ]
-  })
-
-  if (!filePath || canceled) {
-    console.info('Failed new sticky note')
-    return false
+  let i = 0
+  while (existsSync(normalize(`${dirPath}/${newFileName}${i}.json`))) {
+    i++
   }
 
-  const { name: fileName, dir: parentDir } = path.parse(filePath)
+  const newFilePath = `${dirPath}/${newFileName}${i}.json`
 
-  if (parentDir != dirPath) {
-    await dialog.showMessageBox({
-      type: 'error',
-      title: 'New sticky note failed',
-      message: `Must be saved under ${dirPath}`
-    })
-
-    return false
-  }
-
+  const { name: fileName, dir: parentDir } = path.parse(newFilePath)
   console.info(`Creating Sticky Note: ${fileName} at ${dirPath}`)
 
-  await writeFile(filePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
+  await writeFile(newFilePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
 
   return fileName
 }
