@@ -61,11 +61,9 @@ provided.
 <!-- IMPLEMENTED -->
 ## Working Functionality
 
-- Load in a folder and load in list of JSON sticky notes
-- Parse in JSON files by Tiptap editor
-- Autosaving
-- Fully functioning sticky note by creating, writing, and deleting!
-- Basic bold, italics, strikethrough
+- Load a designated folder containing sticky notes data
+- Create, write, and delete a sticky note
+- Bold, italics, strikethrough, underline, and basic colors
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -73,9 +71,8 @@ provided.
 ## Roadmap
 
 - [ ] Rename sticky note
-- [ ] Sticky note subtitle
-- [ ] Individual sticky notes UI / Color customization
-- [ ] Rich text formatting (colors, highlight, bulletinpoints)
+- [ ] Additional options for sticky notes such as subtitles and background colors
+- [ ] Additional rich text formatting (custom colors, highlights, bulletinpoints, alignment)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

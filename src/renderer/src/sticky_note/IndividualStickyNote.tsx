@@ -1,8 +1,8 @@
 import { filePathAtom, stickyNoteAtom } from '@renderer/store'
-import { StickyNoteInfo } from '@shared/models'
 import { useAtom, useAtomValue } from 'jotai'
 
 import { ComponentProps, useCallback, useState } from 'react'
+import { messagePort } from './StickyNoteApp'
 
 // Async function for updating title.
 const updateTitle = async (oldName: string, newName: string) => {
@@ -16,21 +16,32 @@ export const StickyNoteHeader = ({ className }: ComponentProps<'div'>) => {
   const filePath = useAtomValue(filePathAtom)
 
   // Functions to handle onChange & onBlur
+  // This function changes the title as users are actively changing
   const handleTitleUpdate = useCallback((e) => {
     setTitle(e.target.value)
   }, [])
 
-  const handleTitleChange = useCallback(() => {
+  // Once the user focus out of changing the title, the title change occurs
+  const handleTitleChange = useCallback(async () => {
     const fileName = stickyAtom!.title.replace(/^.*[\\/]/, '')
 
     if (title == fileName) {
       return
     }
 
-    updateAtomTitle(filePath + '\\' + title)
+    const normalizeTitle = await window.api.pathNormalize(filePath + '\\' + title)
+
+    messagePort.postMessage({
+      type: 'TitleChange',
+      content: { oldTitle: stickyAtom!.title, newTitle: normalizeTitle }
+    })
+
+    updateAtomTitle(normalizeTitle)
+    // Update the title in the backend
     updateTitle(stickyAtom!.title, title)
   }, [title, stickyAtom])
 
+  // This function updates the title for front end
   const updateAtomTitle = (title: string) => {
     setStickyAtom((prev) => {
       if (prev) {
@@ -43,7 +54,7 @@ export const StickyNoteHeader = ({ className }: ComponentProps<'div'>) => {
   return (
     <div className={className}>
       <input
-        className="focus:outline-none text-xl w-full bg-inherit text-ellipsis"
+        className="focus:outline-none text-xl w-full bg-inherit text-ellipsis truncate"
         type="text"
         tabIndex={-1}
         value={title}

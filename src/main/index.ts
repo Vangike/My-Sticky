@@ -1,36 +1,26 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
-import {
-  DeleteNoteType,
-  NewNoteType,
-  ReadNoteType,
-  RenameNoteType,
-  StickyNoteType
-} from '@shared/types'
-import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+import { app, BrowserWindow, Menu, shell } from 'electron'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import {
-  deleteStickyNote,
-  getStickyNotesInPath,
-  loadFolder,
-  newStickyNote,
-  readContent,
-  renameNote,
-  saveContent
-} from './lib/fileHandling'
+import { appIPCHandle } from './ipcHandle'
+import { readContent } from './lib/fileHandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
+
+const windowMap: Map<number, BrowserWindow> = new Map()
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 350,
     height: 460,
+    minHeight: 80,
     title: 'My Sticky',
     icon: icon,
     show: false,
+    frame: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -62,7 +52,7 @@ function createWindow(): void {
 }
 
 // METHOD: opens a new browser/window for sticky notes
-const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
+export const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   const windowProperties = {}
 
   // Get the Content of the Sticky Note
@@ -78,9 +68,9 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   console.log(fileName)
 
   // Init location of new window to application location
-  if (BrowserWindow.getFocusedWindow()) {
-    const current_window = BrowserWindow.getFocusedWindow()
-    const pos = current_window.getPosition()
+  const parentWindow = BrowserWindow.getFocusedWindow()
+  if (parentWindow) {
+    const pos = parentWindow.getPosition()
     Object.assign(windowProperties, {
       x: pos[0] + 20,
       y: pos[1] + 20
@@ -90,7 +80,9 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   Object.assign(windowProperties, {
     width: 350,
     height: 460,
+    minHeight: 68,
     title: fileName,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
@@ -108,10 +100,11 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   }
 
   stickyNote.on('ready-to-show', () => {
-    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo)
+    stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo, stickyNote.id)
   })
 
   stickyNote.webContents.openDevTools()
+
   return true
 }
 
@@ -121,7 +114,7 @@ const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
 
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.mysticky')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -130,28 +123,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC Handling
-  ipcMain.handle(
-    'stickyNote',
-    (event, stickyNoteInfo: StickyNoteInfo, ...args: Parameters<StickyNoteType>) => {
-      stickyNote(stickyNoteInfo)
-    }
-  )
-  ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
-    getStickyNotesInPath(fileName)
-  })
-
-  ipcMain.handle('loadFolder', () => loadFolder())
-  ipcMain.handle('saveContent', (event, fileName, content) => {
-    saveContent(fileName, content)
-  })
-  ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))
-
-  ipcMain.handle('newNote', (_, ...args: Parameters<NewNoteType>) => newStickyNote(...args))
-  ipcMain.handle('deleteNote', (_, ...args: Parameters<DeleteNoteType>) =>
-    deleteStickyNote(...args)
-  )
-  ipcMain.handle('renameNote', (_, ...args: Parameters<RenameNoteType>) => renameNote(...args))
+  // Function that handles all IPC handlers
+  appIPCHandle()
 
   createWindow()
 

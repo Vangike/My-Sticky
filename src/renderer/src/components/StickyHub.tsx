@@ -44,7 +44,7 @@ export const Header = () => {
   }
 
   return (
-    <div className="w-full bg-gradient-to-r from-neutral-700 to-neutral-800 flex flex-col items-center border-b-4 border-neutral-100/95">
+    <div className="w-full bg-gradient-to-r from-neutral-600 to-neutral-700 flex flex-col items-center border-b-4 border-neutral-100/95">
       <LoadFolder
         className="w-11/12 bg-white mt-2 pl-2 rounded cursor-pointer text-xl"
         onClick={handleLoadFolder}
@@ -85,15 +85,6 @@ const NewStickyNote = ({ className, dir, ...props }: NewStickyNoteProp) => {
   return (
     <div className={className} onClick={() => newStickyFunction(dir)} {...props}>
       +
-    </div>
-  )
-}
-
-// WIP Searchbar component
-const SearchBar = ({ className, ...props }: ComponentProps<'div'>) => {
-  return (
-    <div className={className} {...props}>
-      Search...
     </div>
   )
 }
