@@ -62,11 +62,13 @@ export const StickyNotePreview = ({
       onClick={() => openStickyNoteFunction({ title, subtitle, lastEditTime, content })}
       {...props}
     >
+      {/* Titles */}
       <div className="flex justify-between">
         <h3 className="ml-2 pt-2 mb-1 font-bold truncate text-white mix-blend-difference">
           {processedTitle}
         </h3>
 
+        {/* Delete */}
         <div className="mr-2 pt-2">
           <button
             className="rounded cursor-not-allowed text-white mix-blend-difference transition ease-in-out duration-200 hover:text-neutral-500"
