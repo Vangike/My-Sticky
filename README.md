@@ -61,17 +61,17 @@ provided.
 <!-- IMPLEMENTED -->
 ## Working Functionality
 
-- Load a designated folder containing sticky notes data
-- Create, write, and delete a sticky note
-- Bold, italics, strikethrough, underline, and basic colors
+- Create and open multiple sticky notes with renameable titles. 
+- Create a local disk folder storage to handle all sticky notes.
+- A rich text editor with bold, italics, strikethrough, underline, and basic colors.
+- Quick minimize a sticky note to just its title bar.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Rename sticky note
-- [ ] Additional options for sticky notes such as subtitles and background colors
+- [ ] Additional options for a sticky note such as subtitles & background colors. 
 - [ ] Additional rich text formatting (custom colors, highlights, bulletinpoints, alignment)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
