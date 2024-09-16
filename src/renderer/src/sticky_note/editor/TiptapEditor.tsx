@@ -6,7 +6,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { atom, useSetAtom } from 'jotai'
 import { debounce } from 'lodash'
-import { TextMenu } from './menus/TextMenu/TextMenu'
+import { DivTextMenu, TextMenu } from './menus/TextMenu/TextMenu'
 
 const saveContentAtom = atom(null, async (get, set, fileName: string, newContent: string) => {
   window.api.saveContent(fileName, newContent)
@@ -39,8 +39,10 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
 
   return (
     <>
-      <EditorContent editor={editor} className="flex-1 overflow-y-auto h-full max-h-screen" />
-      <TextMenu editor={editor} />
+      <div className="flex flex-col h-full max-h-screen">
+        <EditorContent editor={editor} className="flex-grow overflow-auto" />
+        <DivTextMenu editor={editor} />
+      </div>
     </>
   )
 }
