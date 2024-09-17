@@ -20,7 +20,10 @@ export const DivTextMenu = ({ editor, className }: TextMenuProps) => {
   const commands = useTextmenuCommands(editor)
   const states = useTextmenuStates(editor)
 
-  const style = cn(className, 'flex flex-row rounded border-t pt-0.5 overflow-y-auto')
+  const style = cn(
+    className,
+    'flex flex-row rounded border-t pt-0.5 overflow-x-auto overflow-y-hidden min-h-4'
+  )
 
   return (
     <div className={style}>
