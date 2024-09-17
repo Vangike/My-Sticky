@@ -6,7 +6,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { atom, useSetAtom } from 'jotai'
 import { debounce } from 'lodash'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { DivTextMenu } from './menus/TextMenu/TextMenu'
 
 const saveContentAtom = atom(null, async (get, set, fileName: string, newContent: string) => {
@@ -21,6 +21,7 @@ const handleSavingDebounce = debounce(async (editor: Editor, fileName: string, s
 export const TiptapEditor = (props: { fileName: string; stickyNoteContent: string }) => {
   const saveStickyContent = useSetAtom(saveContentAtom)
   const [selected, setSelected] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const editor = useEditor({
     editorProps: {
@@ -35,6 +36,13 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
     }
   })
 
+  const handleBlur = (e) => {
+    if (menuRef.current && menuRef.current.contains(e.relatedTarget)) {
+      return
+    }
+    setSelected(false)
+  }
+
   if (!editor) {
     return null
   }
@@ -46,9 +54,13 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
           editor={editor}
           className="flex-grow overflow-auto"
           onClick={() => setSelected(true)}
-          onBlur={() => setSelected(false)}
+          onBlur={handleBlur}
         />
-        {selected && <DivTextMenu editor={editor} />}
+        {selected ? (
+          <DivTextMenu className="min-h-4" editor={editor} ref={menuRef} />
+        ) : (
+          <div className="min-h-4" />
+        )}
       </div>
     </>
   )
