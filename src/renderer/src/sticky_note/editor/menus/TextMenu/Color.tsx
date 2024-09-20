@@ -1,10 +1,14 @@
+import { toggleColorPicker } from '@renderer/store/stickyAtom'
 import { cn } from '@renderer/utils'
+import { useAtom } from 'jotai'
 import { memo, useCallback, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { Icon } from '../../ui/Icon'
 import { Toolbar } from './Toolbar'
 
-export const themeColors = ['#fb7185', '#fdba74', '#d9f99d', '#a7f3d0', '#a5f3fc', '#a5b4fc']
+export const themeColors = ['#fb7185', '#fdba74', '#d9f99d', '#a7f3d0', '#a5f3fc']
+
+// '#a5b4fc'
 
 export type ColorPickerProps = {
   color?: string
@@ -25,7 +29,7 @@ export const ColorButton = memo(({ color, active, onColorChange }: ColorButtonPr
     active && 'bg-neutral-100'
   )
   const bubbleClassName = cn(
-    'w-4 h-4 rounded bg-slate-100 shadow-sm ring-offset-2 ring-current',
+    'w-3 h-3 rounded bg-slate-100 shadow-sm ring-offset-2 ring-current',
     !active && `hover:ring-1`,
     active && `ring-1`
   )
@@ -47,6 +51,7 @@ ColorButton.displayName = 'ColorButton'
 
 export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
   const [colorInputValue, setColorInputValue] = useState(color || '')
+  const [toggleColor, setColorPicker] = useAtom(toggleColorPicker)
 
   const handleColorUpdate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setColorInputValue(event.target.value)
@@ -70,16 +75,23 @@ export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      {/* <HexColorPicker className="w-full" color={color || ''} onChange={onChange} /> */}
-      <input
-        type="text"
-        className="w-full p-2 text-black bg-white border rounded dark:bg-black dark:text-white border-neutral-200 dark:border-neutral-800 focus:outline-1 focus:ring-0 focus:outline-neutral-300 dark:focus:outline-neutral-700"
-        placeholder="#000000"
-        value={colorInputValue}
-        onChange={handleColorUpdate}
-        onBlur={handleColorChange}
-      />
-      <div className="flex flex-wrap items-center gap-1 max-w-[15rem]">
+      {toggleColor ? (
+        <div>
+          <HexColorPicker className="w-full" color={color || ''} onChange={onChange} />
+          <input
+            type="text"
+            className="w-full p-0.5 text-black bg-white border rounded dark:bg-black dark:text-white border-neutral-200 dark:border-neutral-800 focus:outline-1 focus:ring-0 focus:outline-neutral-300 dark:focus:outline-neutral-700"
+            placeholder="#000000"
+            value={colorInputValue}
+            onChange={handleColorUpdate}
+            onBlur={handleColorChange}
+          />
+        </div>
+      ) : (
+        <div className=""></div>
+      )}
+
+      <div className="flex flex-wrap items-center gap-0.5 max-w-[15rem]">
         {themeColors.map((currentColor) => (
           <ColorButton
             active={currentColor === color}
@@ -90,6 +102,12 @@ export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
         ))}
         <Toolbar.Button onClick={onClear}>
           <Icon name="Undo" />
+        </Toolbar.Button>
+        <Toolbar.Button onClick={() => setColorPicker(!toggleColor)}>
+          <Icon
+            name="Brush"
+            className={toggleColor ? 'bg-neutral-100 rounded-md ring-1 ring-neutral-300' : ''}
+          />
         </Toolbar.Button>
       </div>
     </div>
