@@ -38,7 +38,7 @@
 A rich text Sticky Note powered by [TipTap](https://tiptap.dev/). The current project is still in development.  
 The current state of the project is shown below:
 
-<img src="gitasset/StickyNote.PNG" alt="Logo" width="640" height="640">
+<img src="gitasset/StickyNote.png" alt="Logo" width="640" height="640">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
