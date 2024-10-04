@@ -9,6 +9,13 @@ export const useTextmenuCommands = (editor: Editor) => {
   const onBullet = useCallback(() => editor.chain().focus().toggleBulletList().run(), [editor])
   const onOrdered = useCallback(() => editor.chain().focus().toggleOrderedList().run(), [editor])
 
+  const leftAlign = useCallback(() => editor.chain().focus().setTextAlign('left').run(), [editor])
+  const centerAlign = useCallback(
+    () => editor.chain().focus().setTextAlign('center').run(),
+    [editor]
+  )
+  const rightAlign = useCallback(() => editor.chain().focus().setTextAlign('right').run(), [editor])
+
   const onChangeColor = useCallback(
     (color: string) => editor.chain().setColor(color).run(),
     [editor]
@@ -23,6 +30,9 @@ export const useTextmenuCommands = (editor: Editor) => {
     onChangeColor,
     onClearColor,
     onBullet,
+    leftAlign,
+    centerAlign,
+    rightAlign,
     onOrdered
   }
 }

@@ -1132,10 +1132,10 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-task-list/-/extension-task-list-2.5.1.tgz"
   integrity sha512-cQI/U3U5YJbTc+8hSVjD8Jhqjwc/8BaIfHA8fXEk8jxGid42AcBUzlYUZ10JNwjtA6ojsW7Dwrb0meIFnQGVjg==
 
-"@tiptap/extension-text-align@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/@tiptap/extension-text-align/-/extension-text-align-2.5.1.tgz"
-  integrity sha512-FAv3vM8WeyRFLcX+mjIXUuzvap/Pk/PGPKTPVFxlNmzCz5HMr98gca9jOVgcXlS9k4oTn+3AMl/8opD4uVSxWg==
+"@tiptap/extension-text-align@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-text-align/-/extension-text-align-2.8.0.tgz#831f0e1adf14f48be35a57b40e6e680ca69c53d3"
+  integrity sha512-Y6s/DF+P4lxpAnvSrnmt4xGwQT/AJJJm0aA1wu5GuPKpAQ+K4C7K6rE6uGNAXtR39GlewC7KdmcvA+CYhL8xlw==
 
 "@tiptap/extension-text-style@^2.5.1":
   version "2.5.1"

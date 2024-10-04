@@ -2,6 +2,7 @@ import BulletList from '@tiptap/extension-bullet-list'
 import { Color } from '@tiptap/extension-color'
 import ListKeymap from '@tiptap/extension-list-keymap'
 import OrderedList from '@tiptap/extension-ordered-list'
+import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
 import Typography from '@tiptap/extension-typography'
 import Underline from '@tiptap/extension-underline'
@@ -23,5 +24,8 @@ export const ExtensionKit = () => [
   Underline,
   Color,
   TextStyle,
+  TextAlign.configure({
+    types: ['paragraph']
+  }),
   Typography
 ]

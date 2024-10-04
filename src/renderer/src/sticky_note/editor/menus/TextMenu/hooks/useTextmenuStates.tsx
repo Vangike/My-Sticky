@@ -8,6 +8,11 @@ export const useTextmenuStates = (editor: Editor) => {
     isUnderline: editor.isActive('underline'),
     isBullet: editor.isActive('bulletList'),
     isOrdered: editor.isActive('orderedList'),
+
+    isLeft: editor.isActive({ textAlign: 'left' }),
+    isCenter: editor.isActive({ textAlign: 'center' }),
+    isRight: editor.isActive({ textAlign: 'right' }),
+
     currentColor: editor.getAttributes('textStyle')?.color || undefined
   }
 }
