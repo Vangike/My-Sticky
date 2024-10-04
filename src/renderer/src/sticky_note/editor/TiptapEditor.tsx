@@ -1,5 +1,7 @@
 import { Editor } from '@tiptap/core'
+import BulletList from '@tiptap/extension-bullet-list'
 import { Color } from '@tiptap/extension-color'
+import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
@@ -7,6 +9,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { atom, useSetAtom } from 'jotai'
 import { debounce } from 'lodash'
 import { useRef, useState } from 'react'
+import { ExtensionKit } from './ExtensionKit'
 import { DivTextMenu } from './menus/TextMenu/TextMenu'
 
 const saveContentAtom = atom(null, async (get, set, fileName: string, newContent: string) => {
@@ -29,7 +32,7 @@ export const TiptapEditor = (props: { fileName: string; stickyNoteContent: strin
         class: 'tiptap'
       }
     },
-    extensions: [StarterKit, Underline, Color, TextStyle],
+    extensions: [...ExtensionKit()],
     content: JSON.parse(props.stickyNoteContent),
     onUpdate({ editor }) {
       handleSavingDebounce(editor, props.fileName, saveStickyContent)

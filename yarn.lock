@@ -1087,6 +1087,11 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-list-item/-/extension-list-item-2.5.1.tgz"
   integrity sha512-sw/7s7YEwuKawNH2I+4GxIesbAdeIO/lQSfqhrcE2kJZL8+36bfGiRqMrgAbi9aMTpkXXxPBVXj25Ag4cI3fZg==
 
+"@tiptap/extension-list-keymap@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-list-keymap/-/extension-list-keymap-2.8.0.tgz#bffc0c82a3851f0a9e036d6380b27c043345421a"
+  integrity sha512-+Q4Q76/VIq1EAKnX4okXUct+31+/GYXjIn7+5YrV9sbSERPq8s615ffHNhimGZhpTuhlou10jyNsUtok2g9nRQ==
+
 "@tiptap/extension-ordered-list@^2.4.0", "@tiptap/extension-ordered-list@^2.5.1":
   version "2.5.1"
   resolved "https://registry.npmjs.org/@tiptap/extension-ordered-list/-/extension-ordered-list-2.5.1.tgz"
@@ -1142,10 +1147,10 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-text/-/extension-text-2.4.0.tgz"
   integrity sha512-LV0bvE+VowE8IgLca7pM8ll7quNH+AgEHRbSrsI3SHKDCYB9gTHMjWaAkgkUVaO1u0IfCrjnCLym/PqFKa+vvg==
 
-"@tiptap/extension-typography@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/@tiptap/extension-typography/-/extension-typography-2.5.1.tgz"
-  integrity sha512-Hrl4WT4w1zq5S1e3C8pRDiWeba3lq56KGTdR3PUYl0OX1Zv2z4PLu17JoSFcrCi1ZV1zVyNZQw7mPj1NRgjMdg==
+"@tiptap/extension-typography@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-typography/-/extension-typography-2.8.0.tgz#c5614707d4efe70bb094ed01241da6ac0545529e"
+  integrity sha512-g+tbUba6cHbz62rLlmAdXw3GqBfZBVnYXtRqnQzTTPgb8a00+vEoUWA3sNyloq8FhfKFYcMWQDiqaVDqmity+w==
 
 "@tiptap/extension-underline@^2.5.7":
   version "2.5.7"

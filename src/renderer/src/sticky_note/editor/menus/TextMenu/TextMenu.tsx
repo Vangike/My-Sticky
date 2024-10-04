@@ -40,6 +40,12 @@ export const DivTextMenu = forwardRef<HTMLDivElement, TextMenuProps>(
         <MemoButton onClick={commands.onStrike} active={states.isStrike}>
           <Icon name="Strikethrough" />
         </MemoButton>
+        <MemoButton onClick={commands.onBullet} active={states.isBullet}>
+          <Icon name="List" />
+        </MemoButton>
+        <MemoButton onClick={commands.onOrdered} active={states.isOrdered}>
+          <Icon name="ListOrdered" />
+        </MemoButton>
         <Popover.Root>
           <Popover.Trigger asChild>
             <MemoButton>

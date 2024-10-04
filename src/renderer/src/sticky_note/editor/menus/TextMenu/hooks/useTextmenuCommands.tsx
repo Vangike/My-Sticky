@@ -6,6 +6,8 @@ export const useTextmenuCommands = (editor: Editor) => {
   const onItalic = useCallback(() => editor.chain().focus().toggleItalic().run(), [editor])
   const onStrike = useCallback(() => editor.chain().focus().toggleStrike().run(), [editor])
   const onUnderline = useCallback(() => editor.chain().focus().toggleUnderline().run(), [editor])
+  const onBullet = useCallback(() => editor.chain().focus().toggleBulletList().run(), [editor])
+  const onOrdered = useCallback(() => editor.chain().focus().toggleOrderedList().run(), [editor])
 
   const onChangeColor = useCallback(
     (color: string) => editor.chain().setColor(color).run(),
@@ -19,6 +21,8 @@ export const useTextmenuCommands = (editor: Editor) => {
     onStrike,
     onUnderline,
     onChangeColor,
-    onClearColor
+    onClearColor,
+    onBullet,
+    onOrdered
   }
 }

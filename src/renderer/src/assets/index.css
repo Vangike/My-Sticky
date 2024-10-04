@@ -19,6 +19,11 @@
         @apply overflow-hidden;
 
     }
+
+    ul, ol {
+        list-style: revert;
+    }
+
     ::-webkit-scrollbar-thumb {
         @apply bg-[#7A7A7A] rounded-md;
     }

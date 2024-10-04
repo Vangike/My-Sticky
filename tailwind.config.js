@@ -7,6 +7,7 @@ module.exports = {
     extend: {}
   },
   plugins: [
+    require('@tailwindcss/typography'),
     plugin(function ({ addVariant }) {
       addVariant('webkit-highlight-trans', ['&::-webkit-tap-highlight-color: transparent'])
     })
