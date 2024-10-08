@@ -1,4 +1,5 @@
 import { filePathAtom, getListFromFolder, loadFolder, stickyListAtom } from '@renderer/store'
+import { cn } from '@renderer/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
@@ -32,9 +33,14 @@ const newStickyAtom = atom(null, async (get, set, dir: string) => {
 })
 
 // Header component for the Sticky Note application
-export const Header = () => {
+export const Header = ({ className, ...props }: ComponentProps<'div'>) => {
   const setStickyFiles = useSetAtom(stickyListAtom)
   const [dirPath, setFilePathName] = useAtom(filePathAtom)
+
+  const headerStyle = cn(
+    className,
+    'w-full flex flex-col items-center border-b-4 border-neutral-100/95'
+  )
 
   const handleLoadFolder = async () => {
     const folderResult = await loadFolder()
@@ -44,7 +50,7 @@ export const Header = () => {
   }
 
   return (
-    <div className="w-full bg-gradient-to-r from-neutral-600 to-neutral-700 flex flex-col items-center border-b-4 border-neutral-100/95">
+    <div className={headerStyle}>
       <LoadFolder
         className="w-11/12 bg-white mt-2 pl-2 rounded cursor-pointer text-xl"
         onClick={handleLoadFolder}

@@ -11,8 +11,10 @@ window.onmessage = (e) => {
 function App() {
   return (
     <div className="flex flex-col max-h-screen">
-      <TitleBar />
-      <Header />
+      <div className="bg-gradient-to-r from-neutral-600 to-neutral-700">
+        <TitleBar />
+        <Header />
+      </div>
 
       <div id="Body" className="p-2 overflow-y-auto flex-1">
         <StickyNoteList className="space-y-3" />

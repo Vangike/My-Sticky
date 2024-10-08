@@ -24,7 +24,7 @@ export const TitleBar = ({ className, isStickyNote = false, ...props }: TitleBar
   const titleCommands = useTitleCommands()
   const titleBarStyle = cn(
     className,
-    'titlebar flex flex-row width-full items-center bg-neutral-800 text-white justify-between'
+    'titlebar flex flex-row width-full items-center bg-inherit backdrop-brightness-50 text-white justify-between'
   )
 
   return (

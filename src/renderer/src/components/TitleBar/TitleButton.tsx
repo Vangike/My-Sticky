@@ -15,7 +15,7 @@ export const TitleButton = ({
 }: TitleButtonProps) => {
   const titleClass = cn(
     className,
-    'titlebar-button flex-1 text-base transition ease-in-out duration-100 w-6',
+    'titlebar-button flex-1 text-base transition ease-in-out duration-100 w-6 mix-blend-difference',
     withRed ? 'hover:bg-red-500' : 'hover:bg-neutral-500'
   )
 
