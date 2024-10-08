@@ -1,6 +1,5 @@
-import { useTextmenuCommands } from '@renderer/sticky_note/editor/menus/TextMenu/hooks/useTextmenuCommands'
 import { cn } from '@renderer/utils'
-import { ComponentProps, HTMLProps, useCallback } from 'react'
+import { HTMLProps } from 'react'
 import { TitleButton } from './TitleButton'
 import { useStickyTitleCommands, useTitleCommands } from './TitleCommands'
 
@@ -28,7 +27,7 @@ export const TitleBar = ({ className, isStickyNote = false, ...props }: TitleBar
   )
 
   return (
-    <div className={titleBarStyle}>
+    <div className={titleBarStyle} {...props}>
       <div></div>
       <div className="flex flex-row w-auto">
         {isStickyNote && (

@@ -9,8 +9,6 @@ import { readContent } from './lib/fileHandling'
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
 
-const windowMap: Map<number, BrowserWindow> = new Map()
-
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

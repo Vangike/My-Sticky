@@ -50,7 +50,7 @@ export const Header = ({ className, ...props }: ComponentProps<'div'>) => {
   }
 
   return (
-    <div className={headerStyle}>
+    <div className={headerStyle} {...props}>
       <LoadFolder
         className="w-11/12 bg-white mt-2 pl-2 rounded cursor-pointer text-xl"
         onClick={handleLoadFolder}

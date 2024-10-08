@@ -10,8 +10,7 @@ export const TitleButton = ({
   value,
   withRed = false,
   onClick,
-  title,
-  ...props
+  title
 }: TitleButtonProps) => {
   const titleClass = cn(
     className,

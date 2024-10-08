@@ -27,7 +27,7 @@ export const DivTextMenu = forwardRef<HTMLDivElement, TextMenuProps>(
     )
 
     return (
-      <div className={style} ref={ref}>
+      <div className={style} ref={ref} {...rest}>
         <MemoButton onClick={commands.onBold} active={states.isBold}>
           <Icon name="Bold" />
         </MemoButton>

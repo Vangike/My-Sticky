@@ -80,7 +80,7 @@ export const newStickyNote = async (dirPath: string) => {
 
   const newFilePath = `${dirPath}/${newFileName}${i}.json`
 
-  const { name: fileName, dir: parentDir } = path.parse(newFilePath)
+  const { name: fileName } = path.parse(newFilePath)
   console.info(`Creating Sticky Note: ${fileName} at ${dirPath}`)
 
   await writeFile(newFilePath, '{"type":"doc","content":[{"type":"paragraph"}]}')
@@ -111,7 +111,7 @@ export const deleteStickyNote = async (fileName: string) => {
 
 // Rename a sticky note
 export const renameNote = async (filePath: string, newName: string) => {
-  const { name: fileName, dir: parentDir } = path.parse(filePath)
+  const { dir: parentDir } = path.parse(filePath)
 
   if (!filePath) {
     return false

@@ -1,11 +1,5 @@
 import { StickyNoteInfo } from '@shared/models'
-import {
-  DeleteNoteType,
-  NewNoteType,
-  ReadNoteType,
-  RenameNoteType,
-  StickyNoteType
-} from '@shared/types'
+import { DeleteNoteType, NewNoteType, ReadNoteType, RenameNoteType } from '@shared/types'
 import { BrowserWindow, ipcMain } from 'electron'
 import { stickyNote } from '.'
 import {
@@ -30,18 +24,15 @@ export const appIPCHandle = () => {
   ipcMain.handle('appDropdown', () => appDropdown())
 
   // IPC handle for file handling
-  ipcMain.handle(
-    'stickyNote',
-    (event, stickyNoteInfo: StickyNoteInfo, ...args: Parameters<StickyNoteType>) => {
-      stickyNote(stickyNoteInfo)
-    }
-  )
-  ipcMain.handle('getStickyNotesInPath', (event, fileName) => {
+  ipcMain.handle('stickyNote', (_, stickyNoteInfo: StickyNoteInfo) => {
+    stickyNote(stickyNoteInfo)
+  })
+  ipcMain.handle('getStickyNotesInPath', (_, fileName) => {
     getStickyNotesInPath(fileName)
   })
 
   ipcMain.handle('loadFolder', () => loadFolder())
-  ipcMain.handle('saveContent', (event, fileName, content) => {
+  ipcMain.handle('saveContent', (_, fileName, content) => {
     saveContent(fileName, content)
   })
   ipcMain.handle('readContent', (_, ...args: Parameters<ReadNoteType>) => readContent(...args))

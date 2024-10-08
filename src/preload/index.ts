@@ -37,7 +37,7 @@ try {
       ipcRenderer.invoke('getStickyNotesInPath', fileName),
     // Listeners
     stickyNoteInfoListener: (cb: (stickyNoteInfo: StickyNoteInfo, id: number) => void) => {
-      ipcRenderer.on('getStickyNoteInfo', (event, data, id) => cb(data, id))
+      ipcRenderer.on('getStickyNoteInfo', (_, data, id) => cb(data, id))
     },
     titleChangeListener: (callback) =>
       ipcRenderer.on('getTitleChange', (_, oldTitle: string, newTitle: string) =>
