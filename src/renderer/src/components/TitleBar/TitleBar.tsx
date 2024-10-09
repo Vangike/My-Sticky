@@ -28,15 +28,13 @@ export const TitleBar = ({ className, isStickyNote = false, ...props }: TitleBar
 
   return (
     <div className={titleBarStyle} {...props}>
-      <div></div>
+      <div>{isStickyNote && <TitleButton isIcon={true} value="NotebookText" />}</div>
+
       <div className="flex flex-row w-auto">
-        {isStickyNote && (
-          <>
-            <StickyNoteTitleBar />
-          </>
-        )}
+        {isStickyNote && <StickyNoteTitleBar />}
+
         <TitleButton value="&minus;" onClick={titleCommands.minimize} title="Minimize" />
-        <TitleButton withRed={true} value="&#10006;" onClick={titleCommands.close} title="Close" />
+        <TitleButton isRed={true} value="&#10006;" onClick={titleCommands.close} title="Close" />
       </div>
     </div>
   )
