@@ -24,6 +24,7 @@ try {
     appClose: () => ipcRenderer.invoke('appClose'),
     appMinimize: () => ipcRenderer.invoke('appMinimize'),
     appDropdown: () => ipcRenderer.invoke('appDropdown'),
+    appOpenHub: () => ipcRenderer.invoke('appOpenHub'),
     // File handling
     stickyNote: (...args: Parameters<StickyNoteType>) => ipcRenderer.invoke('stickyNote', ...args),
     loadFolder: () => ipcRenderer.invoke('loadFolder'),

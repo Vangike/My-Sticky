@@ -1,16 +1,21 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { app, BrowserWindow, Menu, shell } from 'electron'
+import { atom, useAtom, useSetAtom } from 'jotai'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 import { appIPCHandle } from './ipcHandle'
 import { readContent } from './lib/fileHandling'
+import { appOpenHub } from './lib/titleBarFunctions'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()
 
-function createWindow(): void {
-  // Create the browser window.
+// const mainBrowserID = atom(0)
+export let mainBrowserId = 0
+
+// Main sticky note window
+export function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 350,
     height: 460,
@@ -47,6 +52,7 @@ function createWindow(): void {
   }
 
   mainWindow.webContents.openDevTools()
+  mainBrowserId = mainWindow.id
 }
 
 // METHOD: opens a new browser/window for sticky notes

@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+import { createWindow, mainBrowserId } from '..'
 
 export const appMinimize = () => {
   const browser = BrowserWindow.getFocusedWindow()
@@ -22,5 +23,16 @@ export const appDropdown = () => {
     browser.setSize(browserSize[0], 180)
   } else {
     browser.setSize(browserSize[0], 68)
+  }
+}
+
+export const appOpenHub = () => {
+  const hubWindow = BrowserWindow.fromId(mainBrowserId)
+  console.log('openHub has ran!')
+
+  if (hubWindow) {
+    hubWindow.focus()
+  } else {
+    createWindow()
   }
 }

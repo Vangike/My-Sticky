@@ -1,3 +1,4 @@
+// Main functions for the main window
 export const useTitleCommands = () => {
   const minimize = () => {
     window.api.appMinimize()
@@ -7,12 +8,18 @@ export const useTitleCommands = () => {
     window.api.appClose()
   }
 
+  const openHub = () => {
+    window.api.appOpenHub()
+  }
+
   return {
     minimize,
-    close
+    close,
+    openHub
   }
 }
 
+// Functions for seperate individual sticky notes
 export const useStickyTitleCommands = () => {
   const dropdown = () => {
     window.api.appDropdown()

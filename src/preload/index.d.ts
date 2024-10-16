@@ -15,6 +15,7 @@ export interface StickyNoteAPI {
   appMinimize: () => void
   appClose: () => void
   appDropdown: () => void
+  appOpenHub: () => void
   // File handling
   stickyNote: StickyNoteType
   loadFolder: () => Promise<FolderResult | null>

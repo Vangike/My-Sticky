@@ -11,7 +11,7 @@ import {
   renameNote,
   saveContent
 } from './lib/fileHandling'
-import { appClose, appDropdown, appMinimize } from './lib/titleBarFunctions'
+import { appClose, appDropdown, appMinimize, appOpenHub } from './lib/titleBarFunctions'
 import { pathNormalize } from './lib/util'
 
 export const appIPCHandle = () => {
@@ -22,6 +22,7 @@ export const appIPCHandle = () => {
   ipcMain.handle('appMinimize', () => appMinimize())
   ipcMain.handle('appClose', () => appClose())
   ipcMain.handle('appDropdown', () => appDropdown())
+  ipcMain.handle('appOpenHub', () => appOpenHub())
 
   // IPC handle for file handling
   ipcMain.handle('stickyNote', (_, stickyNoteInfo: StickyNoteInfo) => {
