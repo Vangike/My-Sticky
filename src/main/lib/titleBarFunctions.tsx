@@ -28,7 +28,7 @@ export const appDropdown = () => {
 
 export const appOpenHub = () => {
   const hubWindow = BrowserWindow.fromId(mainBrowserId)
-  console.log('openHub has ran!')
+  console.log('openHub has ran with ID: ' + mainBrowserId)
 
   if (hubWindow) {
     hubWindow.focus()
