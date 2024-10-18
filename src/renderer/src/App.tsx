@@ -9,17 +9,10 @@ window.onmessage = (e) => {
 }
 
 function App() {
-  const [isFocused, setFocused] = useState(false)
-
   return (
-    <div
-      className="flex flex-col max-h-screen"
-      tabIndex={0}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-    >
+    <div className="flex flex-col max-h-screen">
       <div className="bg-gradient-to-r from-neutral-600 to-neutral-700">
-        {isFocused ? <TitleBar /> : <div className="w-full h-6"></div>}
+        <TitleBar />
 
         <Header />
       </div>
