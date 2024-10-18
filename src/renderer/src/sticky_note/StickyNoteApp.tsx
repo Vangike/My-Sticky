@@ -1,7 +1,7 @@
 import { TitleBar } from '@renderer/components/TitleBar/TitleBar'
 import { browserIDAtom, stickyNoteAtom } from '@renderer/store'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { StickyNoteHeader } from './IndividualStickyNote'
 import { TiptapEditor } from './editor/TiptapEditor'
 
@@ -15,6 +15,7 @@ window.onmessage = (e) => {
 export const StickyNoteApp = () => {
   const [stickyNote, setStickyNote] = useAtom(stickyNoteAtom)
   const [browserId, setBrowserId] = useAtom(browserIDAtom)
+  const [isFocused, setFocused] = useState(false)
 
   // Listener from Main to get sticky note information
   // Activate once to prevent rerendering and attaching
@@ -30,9 +31,15 @@ export const StickyNoteApp = () => {
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div
+      className="flex h-full flex-col"
+      tabIndex={0}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
+      {/* TitleBar of sticky note */}
       <div className="bg-amber-200">
-        <TitleBar isStickyNote={true} />
+        {isFocused ? <TitleBar isStickyNote={true} /> : <div className="w-full h-6"></div>}
 
         {stickyNote ? (
           <StickyNoteHeader className="w-full p-2 shadow-md rounded-b-sm" />

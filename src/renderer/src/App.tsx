@@ -1,5 +1,5 @@
 import { Header, StickyNoteList } from '@/components'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { TitleBar } from './components/TitleBar/TitleBar'
 
 export let messagePort
@@ -9,10 +9,18 @@ window.onmessage = (e) => {
 }
 
 function App() {
+  const [isFocused, setFocused] = useState(false)
+
   return (
-    <div className="flex flex-col max-h-screen">
+    <div
+      className="flex flex-col max-h-screen"
+      tabIndex={0}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
       <div className="bg-gradient-to-r from-neutral-600 to-neutral-700">
-        <TitleBar />
+        {isFocused ? <TitleBar /> : <div className="w-full h-6"></div>}
+
         <Header />
       </div>
 

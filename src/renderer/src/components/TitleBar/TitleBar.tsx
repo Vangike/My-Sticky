@@ -27,7 +27,7 @@ export const TitleBar = ({ className, isStickyNote = false, ...props }: TitleBar
   )
 
   return (
-    <div className={titleBarStyle} {...props}>
+    <div className={titleBarStyle} {...props} onMouseDown={(e) => e.preventDefault()}>
       <div>
         {isStickyNote && (
           <TitleButton isIcon={true} onClick={titleCommands.openHub} value="NotebookText" />
