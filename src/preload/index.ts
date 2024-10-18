@@ -27,7 +27,7 @@ try {
     appOpenHub: () => ipcRenderer.invoke('appOpenHub'),
     // File handling
     stickyNote: (...args: Parameters<StickyNoteType>) => ipcRenderer.invoke('stickyNote', ...args),
-    loadFolder: () => ipcRenderer.invoke('loadFolder'),
+    loadFolder: (file) => ipcRenderer.invoke('loadFolder', file),
     saveContent: (...args: Parameters<SaveNoteType>) => ipcRenderer.invoke('saveContent', ...args),
     readContent: (...args: Parameters<ReadNoteType>) => ipcRenderer.invoke('readContent', ...args),
     newStickyNote: (...args: Parameters<NewNoteType>) => ipcRenderer.invoke('newNote', ...args),

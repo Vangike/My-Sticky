@@ -32,7 +32,7 @@ export const appIPCHandle = () => {
     getStickyNotesInPath(fileName)
   })
 
-  ipcMain.handle('loadFolder', () => loadFolder())
+  ipcMain.handle('loadFolder', (_, args = {}) => loadFolder(args))
   ipcMain.handle('saveContent', (_, fileName, content) => {
     saveContent(fileName, content)
   })

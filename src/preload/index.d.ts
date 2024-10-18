@@ -18,7 +18,7 @@ export interface StickyNoteAPI {
   appOpenHub: () => void
   // File handling
   stickyNote: StickyNoteType
-  loadFolder: () => Promise<FolderResult | null>
+  loadFolder: (file) => Promise<FolderResult | null>
   saveContent: (file: string, content: string) => Promise<void>
   readContent: ReadNoteType
   newStickyNote: NewNoteType

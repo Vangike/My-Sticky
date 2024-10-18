@@ -1,5 +1,4 @@
 import { Header, StickyNoteList } from '@/components'
-import { useEffect, useState } from 'react'
 import { TitleBar } from './components/TitleBar/TitleBar'
 
 export let messagePort

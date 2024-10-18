@@ -3,18 +3,32 @@ import { dialog } from 'electron'
 import { existsSync, readdir, readFile, remove, rename, stat, writeFile } from 'fs-extra'
 import path, { normalize } from 'path'
 
-// This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
-export const loadFolder = async (): Promise<FolderResult | null> => {
-  const folderPath = await getFolderPath()
+interface loadFolderProps {
+  filePath?: string
+}
 
-  if (!folderPath) {
-    return null
+// This section handles loading in a folder and return a FolderResult object containing the list of sticky notes and filepath
+export const loadFolder = async ({
+  filePath = ''
+}: loadFolderProps): Promise<FolderResult | null> => {
+  let stickyNoteResult: StickyNoteInfo[]
+  let path: string | null
+
+  if (filePath) {
+    stickyNoteResult = await getStickyNotesInPath(filePath)
+    path = filePath
+  } else {
+    path = await getFolderPath()
+
+    if (!path) {
+      return null
+    }
+
+    stickyNoteResult = await getStickyNotesInPath(path)
   }
 
-  const stickyNoteResult = await getStickyNotesInPath(folderPath)
-
   return {
-    path: folderPath,
+    path: path,
     stickyNoteList: stickyNoteResult
   }
 }
