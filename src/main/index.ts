@@ -47,11 +47,11 @@ export function createWindow(): void {
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  mainWindow.webContents.openDevTools()
   mainBrowserId = mainWindow.id
 }
 
@@ -99,6 +99,7 @@ export const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     stickyNote.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/stickynote.html`)
+    stickyNote.webContents.openDevTools()
   } else {
     stickyNote.loadFile(join(__dirname, '../renderer/stickynote.html'))
   }
@@ -106,8 +107,6 @@ export const stickyNote = async (stickyNoteInfo: StickyNoteInfo) => {
   stickyNote.on('ready-to-show', () => {
     stickyNote.webContents.send('getStickyNoteInfo', newStickyNoteInfo, stickyNote.id)
   })
-
-  stickyNote.webContents.openDevTools()
 
   return true
 }
