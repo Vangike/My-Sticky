@@ -34,7 +34,7 @@ const newStickyAtom = atom(null, async (get, set, dir: string) => {
 
 // Header component for the Sticky Note application
 export const Header = ({ className, ...props }: ComponentProps<'div'>) => {
-  const [dirPath] = useAtomValue(filePathAtom)
+  const dirPath = useAtomValue(filePathAtom)
   const headerStyle = cn(
     className,
     'w-full flex flex-col items-center border-b-4 border-neutral-100/95'
@@ -54,26 +54,26 @@ export const Header = ({ className, ...props }: ComponentProps<'div'>) => {
 
 // Loadfolder component
 const LoadFolder = ({ className, ...props }: ComponentProps<'div'>) => {
-  const filePathName = useAtomValue(filePathAtom)
+  const [filePathName, setFilePathName] = useAtom(filePathAtom)
   const processedTitle = filePathName.replace(/^.*[\\/]/, '')
 
   const setStickyFiles = useSetAtom(stickyListAtom)
-  const [dirPath, setFilePathName] = useAtom(filePathAtom)
 
   // Hook to auto load in folder
   useEffect(() => {
     const autoLoad = async () => {
-      console.log('Auto load has triggered!')
-      if (dirPath) {
-        const folderResult = await loadFolder({ filePath: dirPath })
+      if (filePathName) {
+        console.log('Auto load has triggered!')
+        const folderResult = await loadFolder({ filePath: filePathName })
         const stickyFiles = getListFromFolder(folderResult)
         setStickyFiles(stickyFiles)
       }
     }
-    autoLoad()
-  }, [dirPath])
 
-  // Function
+    autoLoad()
+  }, [filePathName])
+
+  // Manually load in folder function
   const handleLoadFolder = async () => {
     const folderResult = await loadFolder({ filePath: '' })
     const stickyFiles = getListFromFolder(folderResult)
