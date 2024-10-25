@@ -1,12 +1,10 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { StickyNoteInfo } from '@shared/models'
 import { app, BrowserWindow, Menu, shell } from 'electron'
-import { atom, useAtom, useSetAtom } from 'jotai'
 import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 import { appIPCHandle } from './ipcHandle'
-import { readContent } from './lib/fileHandling'
-import { appOpenHub } from './lib/titleBarFunctions'
+import { readContent } from './lib/filehandling'
 
 Menu.setApplicationMenu(null)
 app.disableHardwareAcceleration()

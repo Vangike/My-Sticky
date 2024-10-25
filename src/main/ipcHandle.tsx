@@ -10,7 +10,7 @@ import {
   readContent,
   renameNote,
   saveContent
-} from './lib/fileHandling'
+} from './lib/filehandling'
 import { appClose, appDropdown, appMinimize, appOpenHub } from './lib/titleBarFunctions'
 import { pathNormalize } from './lib/util'
 
