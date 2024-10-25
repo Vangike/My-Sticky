@@ -33,10 +33,9 @@
 </div>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project (WIP)
+## About The Project
 
-A rich text Sticky Note powered by [TipTap](https://tiptap.dev/). The current project is still in development.  
-The current state of the project is shown below:
+A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).
 
 <img src="gitasset/StickyNote.png" alt="Logo" width="640" height="640">
 
@@ -53,8 +52,21 @@ The current state of the project is shown below:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-The project is still getting fleshed out! Once the project is in a stable state, instructions will be 
-provided.
+1. Clone the repo 
+2. Open the repo folder and run terminal within.
+3. Build the project by running one of the following command depending on the OS.  
+
+```
+yarn build:win
+
+yarn build:mac
+
+yarn build:linux
+```
+
+4. Navigate to the "dist" and then the unpacked folder.  
+5. Run "MySticky" application.  
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -79,9 +91,8 @@ provided.
 <!-- CONTACT -->
 ## Contact
 
-[@DapMike_Codes](https://twitter.com/DapMike_Codes)  
-
 [https://github.com/Vangike/My-Sticky](https://github.com/Vangike/My-Sticky)
+vangmmike@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
