@@ -50,7 +50,7 @@ A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Installation  
 
 1. Clone the repo 
 2. Open the repo folder and run terminal within.
