@@ -50,11 +50,17 @@ A rich text Sticky Note powered by [TipTap](https://tiptap.dev/).
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
+## Prerequisite Installation
+1. Must have [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable) installed
 ## Installation  
 
 1. Clone the repo 
-2. Open the repo folder and run terminal within.
-3. Build the project by running one of the following command depending on the OS.  
+2. Open the repo folder and run the terminal within.
+3. Run the following command
+```
+yarn install
+```
+4. Build the project by running one of the following command depending on the OS.  
 
 ```
 yarn build:win
