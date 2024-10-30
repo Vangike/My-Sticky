@@ -9,10 +9,21 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
+        
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # if needed
+          
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v4.1.0
         with:
           node-version: 22
+
+
+          
       - name: Build/release Electron app
         uses: paneron/action-electron-builder@v1.8.1
         with:
